@@ -1,0 +1,43 @@
+bloco:titulo,campoOrdem,campoTitulo,uso,campoTipo,notas
+BLOCO1: Cadastro da pessoa física,,,,,
+*new,9,Foto do cooperado,lacuna,NULL,
+*lei,10,Nome do cooperado,obrig,texto,
+*lei,20,Nacionalidade,obrig,texto,(extenso)
+*prev,30,Naturalidade,esconde,texto,(extenso)
+*lei,40,Idade,obrig,inteiro,(calc.idade dia de admissão)
+*lei,50,Estado Civil,lacuna,texto,(extenso)
+*lei,60,Profissao,obrig,texto,(abrev)
+*prev,65,Grau de instrução,lacuna,texto,
+*prev,80,Data de nascimento,obrig,data,(descartada idade)
+*prev,110,Nome da mãe,lacuna,texto,
+*prev,120,Nome do pai,lacuna,texto,
+*lei,140,Data de admissão,obrig,data,
+*prev,142,Data de adesão,lacuna,data,
+*lei,144,Data demissão ,lacuna,texto,"(demissão a pedido, eliminação ou exclusão)"
+*lei,149,Endereço (residência),obrig,estrutura,"(extenso, com CEP)"
+*old,170,Observações,lacuna,texto,
+*old,175,Assinatura do cooperado,lacuna,NULL,
+*old,180,"Testemunhas (RG, CPF, nome e assinatura)",lacuna,estrutura,(acrescentamos RG e CPF)
+,,,,,
+BLOCO2: Documentos do cooperado,,,,,
+*new,1,RG,obrig,estrutura,(com data emissao e orgao exp.)
+*old,2,CPF,obrig,codigo,
+*prev,3,Carteira profissional,lacuna,estrutura,(codigo e data de emissao)
+*prev,4,Certidão de Nascimento/Casamento,lacuna,codigo,(dizer se casamento ou nascimento)
+*prev,5,PIS,lacuna,,(data de emissão?)
+*prev,6,Título de eleitor,lacuna,estrutura,"(codigo,zona,secao,data de emissão)"
+,,,,,
+BLOCO3: Dependentes,,,,,
+*prev,1,nome do dependente1,lacuna,texto,
+*prev,2,data de nascimento1,lacuna,data,
+*prev,3,nome do dependente2,lacuna,texto,
+*prev,4,data de nascimento2,lacuna,data,
+*prev,...,...,,,
+,,,,,
+,,,,,
+BLOCO4: ver layout Tabela Conta Cor. Capital,,,,,
+*old,1,Data,lacuna,data,
+*old,2,Histórico das subscrições de quotas-parte,lacuna,texto,
+*old,3,Subscrito,lacuna,real,
+*old,4,Realizado,lacuna,real,
+*old,5,Saldo,lacuna,real,
