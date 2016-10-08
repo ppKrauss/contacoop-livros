@@ -3,7 +3,7 @@
  * Gera esboço preliminar dos templates de cada seção de um livro contábil.
  * EXEMPLOS DE USO (no terminal):
  *  php src/makeTpl.php matricula
- *  php src/makeTpl.php matricula
+ *  php src/makeTpl.php etc
  */
 
 // use "composer update" in the same folder of json.
