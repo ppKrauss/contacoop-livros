@@ -3,6 +3,8 @@
 	<span class='DataAdesao'><span>Data de adesão:</span><span class='data'>{{DataAdesao}}</span></span>
 </header>
 
+<!-- resolver com $('#parent:has(#child)'); -->
+
 <section id='bloco-1'><h2>Cadastro da pessoa física</h2>
 	<p>
 		<span class='FotoCooperado'>{{FotoCooperado}}</span>
@@ -11,6 +13,7 @@
 		<span class='Naturalidade'><span>Naturalidade:</span><span class='texto'>{{Naturalidade}}</span></span>
 		<span class='Nacionalidade'><span>Nacionalidade:</span><span class='texto'>{{Nacionalidade}}</span></span>
 	</p>
+
 	<p>
 		<span class='Idade'><span>Idade:</span><span class='inteiro'>{{Idade}}</span></span>
 		<span class='EstadoCivil'><span>Estado Civil:</span><span class='texto'>{{EstadoCivil}}</span></span>
@@ -50,7 +53,7 @@
 		{{#bloco3}}
 		<tr>
 			<td class='texto'>{{NomeDependente}}</td>
-			<td class='data'>{{DataNascimento}}</td>
+			<td class='data'><time>{{DataNascimento}}</time></td>
 		</tr>
 		{{/bloco3}}
 		</tbody>
@@ -68,7 +71,7 @@
 	<tbody>
 	{{#bloco4}}
 	<tr>
-		<td class='data'>{{Data}}</td>
+		<td class='data'><time>{{Data}}</time></td>
 		<td class='texto'>{{HistoricoSubscricoesQP}}</td>
 		<td class='real'>{{Subscrito}}</td>
 		<td class='real'>{{Realizado}}</td>
