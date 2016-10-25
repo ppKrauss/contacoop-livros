@@ -2,8 +2,8 @@
 /**
  * Gera esboço preliminar dos templates de cada seção de um livro contábil.
  * EXEMPLOS DE USO (no terminal):
- *  php src/makeTpl.php matricula
- *  php src/makeTpl.php etc
+ *  php src/makeTpl.php
+ *  php src/makeTpl.php matricula-html
  */
 
 // use "composer update" in the same folder of json.
@@ -15,8 +15,8 @@ $cmd = isset($argv[1])? $argv[1]: '';
 $f = __DIR__;
 if (substr($cmd,0,9)=='matricula')
   $f .= '/../data/livroMatricula-campos.csv';
-else
-  die("\n ERRO: argumento '$cmd' ainda desconhecido.\n (disponíveis matricula|x|y)\n");
+elseif ($cmd!='help')
+  die("\nERRO1: argumento '$cmd' ainda desconhecido.\n (use help)\n");
 
 $vars=[];
 
@@ -25,7 +25,7 @@ foreach (getCsvFields($f) as $r) {
     if (preg_match('/^\w+\s*(\d+)\s*:\s*(.+)$/i',$r["bloco:titulo"],$m))
       list($blkID,$blk_tit) = array_slice($m,1);
     else
-      die("\nBLOCO COM FALHA ({$r["bloco:titulo"]}).\n");
+      die("\nERRO1.1: BLOCO COM FALHA ({$r["bloco:titulo"]}).\n");
     $vars[$blkID] = [['blk_tit'=>$blk_tit]];
   } elseif ($r["campoTitulo"]) {
     unset($r["bloco:titulo"]);
@@ -33,6 +33,7 @@ foreach (getCsvFields($f) as $r) {
     $vars[$blkID][] = $r;
   }
 }
+
 
 
 switch ($cmd) {
@@ -46,7 +47,18 @@ switch ($cmd) {
   die("\n");
   break;
 
+  case 'matricula-listvarsFull':
+  foreach($vars as $bloco_i=>$items) {
+    echo "\n--- BLOCO-$bloco_i";
+    foreach ($items as $i => $r) if (isset($r['label']))
+      echo "\n\t\${$r['label']}={$r['campoTipo']}";
+  }
+  die("\n");
+  break;
+
+
   case 'matricula-vars':
+  // falta complemento emitindo matricula-listvarsFull com tipoJSON-subtipo
   $f = __DIR__.'/../data/edi-senoConsseno-modelo2016Av1.csv';
   $layout = [];
   $ediVars = array_map('str_getcsv',file($f));
@@ -56,7 +68,6 @@ switch ($cmd) {
         $layout[substr($ediVars[$linha][$col],1)] = "l{$linha}c$col";
   }
   var_export($layout);
-  die("\ndebig2\n");
   break;
 
   case 'matricula-html':
@@ -87,9 +98,17 @@ EOF;
   echo "\n</article>";
   break;
 
+  case 'help':
+  case 'ajuda':
+  case 'matricula-ajuda':
+  echo "\n---- AJUDA ----\nParâmetros válidos:
+    matricula-listvars     = lista as variáveis.
+    matricula-listvarsFull = lista rótulo e campoTipo das variáveis.
+    matricula-html         = sugere HTML montado com as variáveis.
+  ";
   default:
-    echo "\nERRO '$cmd' DESCONHECIDO.";
-  break;
+    echo "\nERRO2 '$cmd' DESCONHECIDO.\n";
+
 } // switch
 
 
@@ -122,7 +141,7 @@ function parseToLabel($s,$stdType='lex',$MAXLEN=20){
     break;
 
   default:
-    die("\nERRO: tipo '$stdType' desconhecido\n");
+    die("\nERRO3: tipo '$stdType' desconhecido\n");
   } // switch
   return $s;
 } // func

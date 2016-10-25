@@ -1,32 +1,45 @@
 <?php
+// usar php src/makeIntermedData.php -e -j > data/raw/livroMatricula-dados.json
 // cooperados-CopPlastcooper.csv  cooperados-tudo-modoBold.csv
 
 $opt = [
+  // revisar com '' visto que opcional vazio é false, e value vazio não passa nada.
     'j'=>true,  // saidas json
-    'd'=>true,  // $debugResto
-    'v'=>true,  // validar dados brutos
+    'd'=>true,  // $debugResto, 1=1linha, 2=2 linhas, etc.
+    'v'=>true,  // validar dados brutos, 1=tudo, 2=filtrado
     'e'=>true,  // use EDI (reconfigurar array quando for usar)
     'h'=>true,  // help
 ];
-$opt   = array_merge( $opt, getopt("jdveh") );
-$optNo = array_reduce( $opt, function($c,$x){$c = $c&&$x; return $c;}, true );
+$opt   = array_merge( $opt, getopt("jd:v:eh") );
+$optNo = array_reduce( $opt, function($c,$x){$c = $c&&($x===true); return $c;}, true ); // !==''
 
 if ($optNo || !$opt['h']) die(<<<EOT
   ---- Make Intermediary Data ----
   OPITIONS:
-  -j saidas json
-  -d debug resto;
-  -v validar dados full
-  -e use EDI;
+  -j saidas json;
+  -v comando validar dados para CSV, 1=full, 2=filtrado;
+  -e comando use EDI;
+  -d comando debug 1,2,...N, para o resto (sem EDI);
   -h este help.\n\n
 EOT
 );
 
+$codIBGE2cidade = [];
+$ufOk = [];
+$csv = array_map('str_getcsv',file(__DIR__.'/../data/municipios-IBGE.csv'));
+$head = array_shift($csv);
+foreach($csv as $r) {
+    $x = array_combine($head,$r); //cod-IBGE,nome,UF,cod-munic-IBGE,creation,cod-lex
+    $codIBGE2cidade[$x['cod-IBGE']] = $x['nome'];
+    $ufOk[$x['UF']]=1;
+}
 
 /////////////////////////////
 
 $EDI = [  // obtido do EDI.CVS já preenchido
+  // FALTA parser indicar tipo/subtipo, ex. 'cpf' => 'l23c1#string-cpf','Endereco-codIBGE' => 'l23c1#string-codIBGE',
   'matricula' => 'l1c4',
+  'NomeCooperado' => 'l1c0',
   'Endereco-logradouro-tipo' => 'l3c1',
   'Endereco-logradouro-nome' => 'l3c4',
   'Endereco-logradouro-num' => 'l3c8',
@@ -51,6 +64,28 @@ $EDI = [  // obtido do EDI.CVS já preenchido
   'dependentes-qt' => 'l50c1',
 ];
 
+$EDI_tipo = [  // obtido do parser de variaveis no makeTpl.php
+  'matricula' => 'integer',
+  'NomeCooperado' => 'string-nomePtBR',
+  'NomePai' => 'string-nomePtBR',
+  'NomeMae' => 'string-nomePtBR',
+  'Endereco-cep' => 'string-cep',
+  'Endereco-codIBGE' => 'string-codIBGE',
+  'Endereco-uf' => 'string-uf',
+  'Endereco-paisCod' => 'string-codIBGE-pais',
+  'email' => 'string-email',
+  'EstadoCivil' => 'integer',
+  'grauInstrucao' => 'integer',
+  'DataNascimento' => 'string-date-ptBR',
+  'DataNascimento-uf' => 'string-uf',
+  'DataNascimento-codIBGE' => 'string-codIBGE2cidade',
+  'DataNascimento-codPais' => 'string-codIBGE-pais2nacionalidade',
+  'cpf' => 'string-cpf',
+  'rg_num' => 'string-rgNum',
+  'rg_exp' => 'string-rgExp',
+  'dependentes-qt' => 'integer',
+];
+
 $c= new getCoops();
 
 $coops = $c->get_org(__DIR__.'/../data/raw/cooperados-CopPlastcooper.csv');
@@ -58,25 +93,30 @@ $rg_coops = array_ofKey('rg' , $coops['cooperados'], true);
 
 $blk = $c->get_allPersons(__DIR__.'/../data/raw/cooperados-tudo-modoBold.csv',true);
 
-if (!$opt['v']) {
-  $c->blocks_parse($blk,'validar');
+if ($opt['v']!==true) {
+  $c->blocks_parse($blk, 'validar', ($opt['v']==2)? NULL: $rg_coops, 'rg_num');
   die("\n");
 }
 
-$x = $c->blocks_parse($blk,$rg_coops,'rg_num');
+if ($opt['d']!==true) $EDI = NULL;
+$coopBlocks = $c->blocks_parse($blk,'e',$rg_coops,'rg_num');
 
-if (!$opt['d']) {  // gera planilha para preencher EDI.CSV
-  foreach ($x as $r){
-    $z = $r['resto'];
+if ($opt['d']!==true) {  // gera planilha para preencher EDI.CSV
+  for($nrecs = 0; $nrecs<$opt['d']; $nrecs++){
+    $z = $coopBlocks[$nrecs]['dump'];
     $sep = join(',', array_fill(1, count(str_getcsv($z[0])), '--') );
     foreach($z as $linha)
       echo "\n$linha";
     echo "\n$sep";
   } // for
   die("\n");
-} elseif (!$opt['j']) echo json_encode($x); else var_export($x);
-
-
+} elseif (!$opt['j'] && !$opt['e'])
+  echo json_encode($coopBlocks);
+elseif (!$opt['e'])
+  var_export($coopBlocks);
+else
+  echo "ERRO, sem opção de comando. Use -h\n";
+//die(json_encode($EDI));
 
 
 
@@ -93,15 +133,13 @@ class getCoops {
    * @param $json boolean true para JSON output.
    * @param $json boolean true para output de mensagens de debug.
    */
-  function blocks_parse($blks,$filt_lst=NULL,$filt_key='rg_num',$json=false,$debug=0) {
+  function blocks_parse($blks,$cmd='validar',$filt_lst=NULL,$filt_key='rg_num',$json=false,$debug=0) {
     global $EDI;
+    global $EDI_tipo;
     $useEDI = (count($EDI)>1);
+    $useDump = false;
     $rec = [];
-    $validar=false;
-    if (is_string($filt_lst)) {
-      $validar = ($filt_lst=='validar');
-      $filt_lst=NULL;
-    }
+    $validar = ($cmd=='validar')? true: false;
     for($i=1; $i<=count($blks); $i++) {
       $r = $blks[$i];
       $r1 = str_getcsv($r[1]);
@@ -109,31 +147,37 @@ class getCoops {
       if ($validar && $nome) {
         $r23 = str_getcsv($r[23]);
         $matricula = $r1[4];
-        $cpf    = CPFformat($r23[1]);
-        $rg_num = RGformat_num($r23[3]);
-        $rg_exp = RGformat_exp($r23[5]);
-        $aux = "\n$matricula,$nome,$cpf,$rg_num,$rg_exp";
-        if (strrpos($aux,'?')) echo $aux;
+        $xx['cpf']    = CPFformat($r23[1]);
+        $xx['rg_num'] = RGformat_num($r23[3]);
+        $xx['rg_exp'] = RGformat_exp($r23[5]);
+        $aux = "\n$matricula,$nome,$xx[cpf],$xx[rg_num],$xx[rg_exp]";
+        if (
+            strrpos($aux,'?')
+            &&
+            (!$filt_lst || in_array($xx[$filt_key],$filt_lst))
+        ) echo $aux;
+
       } elseif ($nome && $useEDI) {
         $rec0 = [];
         foreach($EDI as $varname=>$ref) if (preg_match('/^l(\d+)c(\d+)$/',$ref,$m)) {
           list($lin,$col) = array_splice($m,1);
           $cols = str_getcsv($r[$lin]);
-          $rec0[$varname]=$cols[$col];
+          $rec0[$varname]= isset($EDI_tipo[$varname])?
+            formatar($cols[$col],$EDI_tipo[$varname]):
+            $cols[$col]
+          ;
         } // foreach
-        // falta automatizar a partir de campoTipo de livroMatricula-campos.csv
-        $rec0['cpf']    = CPFformat($rec0['cpf']);
-        $rec0['rg_num'] = RGformat_num($rec0['rg_num']);
-        $rec0['rg_exp'] = RGformat_exp($rec0['rg_exp']);
-
+        // $rec0['etcFuncional']: funcionais como idade(nascimento,dataRef)
+        if ($useDump) $rec0['dump']=$r;
         if (  !$filt_lst || in_array($rec0[$filt_key],$filt_lst)  )
           $rec[] = $rec0;
+
       } elseif ($nome) {
         $r23 = str_getcsv($r[23]);
         $rec0 = [
           'nome'=>$nome,  'dump_n'=>$i,   'matricula'=>$r1[4],
           'cpf'=>CPFformat($r23[1]), 'rg_num'=>RGformat_num($r23[3]), 'rg_exp'=>RGformat_exp($r23[5]),
-          'resto'=>$r
+          'dump'=>$r
         ];
         if ($debug) echo "\n$i=\n\t$r1[0] matricula=$r1[4]\n\t$r[26]\n\t$r[27]\n\t$r[28]\n\t$r[29]";
         if (  !$filt_lst || in_array($rec0[$filt_key],$filt_lst)  )
@@ -291,10 +335,76 @@ function mask($val, $mask) {
 }
 
 function CPFformat($val) {
-  $val = preg_replace('/[^0-9]/', '', (string) $val); // \D
+  $val = preg_replace('/[^0-9]/', '', $val); // \D
   if (validar_cpf($val,false))
     return mask($val,'cpf');
   else return "?$val";
 }
 
+function CEPformat($val) {
+  $val = preg_replace('/\D/', '', $val);
+  return (strlen($val)==8)? mask($val,'cep'): "?$val";
+}
+
+/**
+ * formata conforme convenção de rótulo de tipo.
+ * Falta criar classe com array de funções, associando direto os rótulos.
+ * 1) case, 2) isset(funcassoc); 3) else $tipoDefault.
+ */
+function formatar($val,$tipo,$tipoDefault='nada') {
+  global $codIBGE2cidade;
+  global $ufOk;
+
+  switch ($tipo) {
+    case 'string-cep':   return CEPformat($val);
+    case 'string-cpf':   return CPFformat($val);
+    case 'string-codIBGE':  return isset($codIBGE2cidade[$val])?
+      $val:
+      "?$val"
+      ;
+    case 'string-codIBGE2cidade':  return isset($codIBGE2cidade[$val])?
+      $codIBGE2cidade[$val]:
+      "?cidade cod. $val"
+      ;
+    case 'string-codIBGE-pais': return ($val==105)? 'Brasil': "exterior ($val)";
+    case 'string-codIBGE-pais2nacionalidade': return ($val==105)? 'brasileiro': "estrangeiro ($val)";
+    case 'string-rgNum':  return RGformat_num($val);
+    case 'string-rgExp':  return RGformat_exp($val);
+    case 'string-uf': $v=strtoupper(trim($val)); return isset($ufOk[$v])? $v: "?$val=$v";
+    case 'integer':       return preg_replace('/[^\d]+/','',$val);
+    case 'string-nomePtBR':  return format_nomePtBR($val);
+    case 'string-trim':  return trim($val);
+    case 'nada':
+    default:             return $val;
+  }
+}
+
+/**
+ * Formata string de nome próprio brasileiro.  Falta tratar "Papa Pio XXIII"e outras.
+ * regex romano simples = '^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$';
+ */
+function format_nomePtBR($val, $stdSufix=true, $useOthers=true) {
+  // $curloc = setlocale(LC_ALL, 0);...  nem assim!
+  // if (substr($curloc,0,20)!='LC_CTYPE=pt_BR.UTF-8') die("\nERRO323: Brazil requer LC_CTYPE=pt_BR.UTF-8!!");
+  $minuscular = [
+    'de',  'do', 'da', 'dos', 'das',
+     'e', 'em', 'na', 'no', 'nas', 'nos'
+  ];
+  if ($useOthers) // outros populares no BR mas que não são pt.
+    $minuscular = array_merge($minuscular,[
+        'di','dello', 'della', 'dalla','dal', 'del','van', 'von', 'y'
+    ]);
+  $r=[];
+  $partes = preg_split( '/\s+/u', mb_strtolower(trim($val),'UTF-8') );
+  // pode-se usar $partes[0] para qualificar gênero via heurística. Ver Gender.pm.
+  $n = count($partes)-1;
+  if ($stdSufix && ($partes[$n]=='jr'||$partes[$n]=='jr.')) $partes[$n]='júnior';
+  foreach ($partes as $w) $r[] = in_array($w,$minuscular)?
+      $w:
+      mb_convert_case($w,MB_CASE_TITLE,'UTF-8') . (
+        (mb_strlen($w,'UTF-8')==1)? '.': ''
+      )
+  ;
+  return join(' ',$r);
+}
 ?>
