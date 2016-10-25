@@ -9,10 +9,9 @@
 			<br/><span class='DataAdesao'><span>Data de adesão/admissão:</span> <span class='vdata wd10em'>{{DataAdesao}}</span></span>
 			<br/><span class='DataDemissao'><span>Data demissão:</span> <span class='vdata wd10em'>{{DataDemissao}}</span></span>
 			<br/>&#160;
-			<br/><span class='Nacionalidade'><span>Nacionalidade:</span> <span class="vtexto wd10em">{{DataNascimento-codPais}}</span></span>
-			&#160;<span class='DataNascimento'><span>Data de nascimento:</span> <span class="vdata wd10em">{{DataNascimento}}</span></span>
-			<br/><span class='DataNascimento'><span>Cidade:</span> <span class="vtexto wd15em">{{DataNascimento-codIBGE}}</span></span>
-			&#160;<span class="vtexto wd03em">{{DataNascimento-uf}}</span>
+			<br/><span class='DataNascimento'><span>Data de nascimento:</span> <span class="vdata wd10em">{{DataNascimento}}</span></span>
+			&#160;<span class='Nacionalidade'><span>Nacionalidade:</span> <span class="vtexto wd10em">{{DataNascimento-codPais}}</span></span>
+			<br/><span class='DataNascimento'><span>Cidade:</span> <span class="vtexto">{{DataNascimento-codIBGE}}, {{DataNascimento-uf}}</span></span>
 			<br/><span class='NomeMae'><span>Nome da mãe:</span> <span class='vtexto wd30em'>{{NomeMae}}</span></span>
 			<br/><span class='NomePai'><span>Nome do pai:</span> <span class='vtexto wd30em'>{{NomePai}}</span></span>
 		</td>
@@ -21,25 +20,30 @@
 		</td>
 		</tr></table>
 
+<!-- box com fundo https://wdrp.name-services.com/whois/wdrp.aspx?key=DA1FFB24-8EEF-4647-9813-0F718B470564 -->
+
 		<div class="blk">Dados relativos à data de adesão:
-			<blockquote>
+			<blockquote class="box">
 			<span class='Idade'><span>Idade:</span> <span class="vinteger wd03em">{{Idade}}</span></span>
-			<br/><span class='Naturalidade'><span>Naturalidade:</span> <span class="vtexto wd10em">{{Naturalidade}}</span></span>
-			&#160;<span class='EstadoCivil'><span>Estado Civil:</span> <span class='vtexto wd10em'>{{EstadoCivil}}</span></span>
+
+			&#160;<span class='Naturalidade'><span>Naturalidade:</span> <span class="vtexto wd10em">{{Naturalidade}}</span></span>
+			&#160;&#160; Sexo:{{sexo}} &#160; <span class='EstadoCivil'><span>Estado Civil:</span> <span class='vtexto wd10em'>{{EstadoCivil}}</span></span>
 			<br/><span class='Profissao'><span>Profissao:</span> <span class='vtexto wd10em'>{{Profissao}}</span></span>
-			<br/><span class='GrauInstrucao'><span>Grau de instrução:</span> <span class='vtexto wd10em'>{{GrauInstrucao}}</span></span>
-			<br/>Endereço (residência):
-			&#160;<span class='vtexto wd03em'>{{Endereco-logradouro-tipo}}</span> <span class='vtexto wd30em'>{{Endereco-logradouro-nome}}</span>
-			nº<span class='vtexto wd05em'>{{Endereco-logradouro-num}}</span>
-			<br/>	&#160;&#160; &#160; &#160; CEP <span class='vtexto wd05em'>{{Endereco-cep}}</span>
-			&#160;&#160; &#160; &#160; <span class='vtexto wd25em'>{{Endereco-cidade}}</span><span class="vtexto wd03em">{{Endereco-uf}}</span>
+			&#160;<span class='GrauInstrucao'><span>Grau de instrução:</span> <span class='vtexto wd10em'>{{grauInstrucao}}</span></span>
+			<br/>Endereço residencial:
+			<br/> &#160; <span class='vtexto'>{{Endereco-logradouro-tipo}}. {{Endereco-logradouro-nome}}, nº{{Endereco-logradouro-num}}</span>  &#160; • &#160; CEP <span class='vtexto'>{{Endereco-cep}}</span> &#160; • &#160; <span class='vtexto'>{{Endereco-cidade}}, {{Endereco-uf}}</span>
 		</blockquote>
 	</div>
 
-	<p>
-	</p>
-	<p><span class='Observacoes'><span>Observações:</span><span class='texto'>{{Observacoes}}</span></span></p>
-	<p><span class='AssinaturaCooperado'><span>Assinatura do cooperado:</span><span class='NULL'>{{AssinaturaCooperado}}</span></span></p>
+	<div class="blk">Documentos:
+		<blockquote class="box">...  CPF {{cpf}}, RG {{rg_num}} ({{rg_exp}}), ... 
+
+		</blockquote>
+	</div>
+	<p>Dependentes: {{dependentes-qt}}</p>
+
+	<p style="height:50px"><span class='Observacoes'><span>Observações:</span><span class='vtexto wd30em'>{{Observacoes}}</span></span></p>
+	<p><span class='AssinaturaCooperado'><span>Assinatura do cooperado:</span><span class='vtexto wd30em'>{{AssinaturaCooperado}}</span></span></p>
 	<p><span class='Testemunhas'><span>Testemunhas (RG, CPF, nome e assinatura):</span><span class='estrutura'>{{Testemunhas}}</span></span></p>
 
 </section>

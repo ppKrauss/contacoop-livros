@@ -88,18 +88,20 @@ parece ser melhor que https://www.w3.org/Style/Examples/007/leaders.en.html
     }
   }
 
+
   body {
     font-family: Helvetica,Verdana;
     font-size: 8pt;
 
       /* background-color: lightblue; */
   }
+
 	.vtexto, .vdata, .vinteger {
 		font-style: italic;
 	}
 
 	.wd30em { width: 35ex; display: inline-block;}
-  .wd25em { width: 25ex; display: inline-block;}
+	.wd25em { width: 25ex; display: inline-block;}
 	.wd15em { width: 15em; display: inline-block;}
 	.wd10em { width: 8em;  display: inline-block;}
 	.wd05em { width: 5em;  display: inline-block;}
@@ -112,10 +114,20 @@ parece ser melhor que https://www.w3.org/Style/Examples/007/leaders.en.html
 	}
 
 	section {
-    font-size: 9pt;
-  }
+		font-size: 9pt;
+	}
 	section p, section td, blockquote {
     line-height:150%;
+  }
+
+  .box {
+	margin:0 auto;
+	padding:18px;
+	border:4px solid #577;  /* #9A9EA7 */
+	background-color:#FFF;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
   }
 
 	/* Demais formatações */
