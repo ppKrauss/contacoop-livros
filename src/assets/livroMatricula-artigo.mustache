@@ -1,85 +1,69 @@
-<article id='matricula-{{IDmatricula}}'>
-<header><h1>Matrícla {{IDmatricula}}</h1>
-	<span class='DataAdesao'><span>Data de adesão:</span><span class='data'>{{DataAdesao}}</span></span>
-</header>
+<article id='matricula-{{matricula}}'>
 
-<!-- resolver com $('#parent:has(#child)'); -->
+<section id='bloco-1' class="dados">
 
-<section id='bloco-1'><h2>Cadastro da pessoa física</h2>
-	<p>
-		<span class='FotoCooperado'>{{FotoCooperado}}</span>
-		<span class='NomeCooperado'><span>Nome do cooperado:</span><span class='texto'>{{NomeCooperado}}</span></span>
-		<span class='DataNascimento'><span>Data de nascimento:</span><span class='data'>{{DataNascimento}}</span></span>
-		<span class='Naturalidade'><span>Naturalidade:</span><span class='texto'>{{Naturalidade}}</span></span>
-		<span class='Nacionalidade'><span>Nacionalidade:</span><span class='texto'>{{Nacionalidade}}</span></span>
-	</p>
+	<table width="100%"><tr>
+		<td>
+			<h1>Matrícula {{matricula}} &#160; <small>(pessoa física)</small></h1>
+			<span class='NomeCooperado'><span>Nome do cooperado:</span> <span class="vtexto wd50em">{{NomeCooperado}}</span></span>
+			<br/><span class='Cpf'><span>CPF:</span> <span class='vtexto'>{{cpf}}</span></span>
+			&#160;&#160; <span class='Sexo'><span>Sexo:</span> <span class='vtexto'>{{sexo}}</span></span>
+			&#160;&#160;<span class='Nacionalidade'><span>Nacionalidade:</span> <span class="vtexto">{{DataNascimento-codPais}}</span></span>
+			<br/>&#160;
+			<br/><span class='DataNascimento'><span>Data de nascimento:</span> <span class="vdata wd10em">{{DataNascimento}}</span></span>
+			&#160;<span class='DataNascimento'><span>Cidade:</span> <span class="vtexto">{{DataNascimento-codIBGE}}, {{DataNascimento-uf}}</span></span>
+			<br/><span class='NomeMae'><span>Nome da mãe:</span> <span class='vtexto wd30em'>{{NomeMae}}</span></span>
+			<br/><span class='NomePai'><span>Nome do pai:</span> <span class='vtexto wd30em'>{{NomePai}}</span></span>
+		</td>
+		<td width="210" class="FotoCooperado">
+			<img src="./src/assets/_local/john-doe.jpg"/>
+		</td>
+		</tr></table>
 
-	<p>
-		<span class='Idade'><span>Idade:</span><span class='inteiro'>{{Idade}}</span></span>
-		<span class='EstadoCivil'><span>Estado Civil:</span><span class='texto'>{{EstadoCivil}}</span></span>
-		<span class='Profissao'><span>Profissao:</span><span class='texto'>{{Profissao}}</span></span>
-		<span class='GrauInstrucao'><span>Grau de instrução:</span><span class='texto'>{{GrauInstrucao}}</span></span>
-	</p>
-	<p><span class='Endereco'><span>Endereço (residência):</span><span class='estrutura'>{{Endereco}}</span></span></p>
-	<p>
-		<span class='NomeMae'><span>Nome da mãe:</span><span class='texto'>{{NomeMae}}</span></span>
-		<span class='NomePai'><span>Nome do pai:</span><span class='texto'>{{NomePai}}</span></span>
-	</p>
-	<p>
-		<span class='DataAdmissao'><span>Data de admissão:</span><span class='data'>{{DataAdmissao}}</span></span>
-		<span class='DataDemissao'><span>Data demissão :</span><span class='texto'>{{DataDemissao}}</span></span>
-	</p>
-	<p><span class='Observacoes'><span>Observações:</span><span class='texto'>{{Observacoes}}</span></span></p>
-	<p><span class='AssinaturaCooperado'><span>Assinatura do cooperado:</span><span class='NULL'>{{AssinaturaCooperado}}</span></span></p>
-	<p><span class='Testemunhas'><span>Testemunhas (RG, CPF, nome e assinatura):</span><span class='estrutura'>{{Testemunhas}}</span></span></p>
+		<span class='DataAdesao'><span>Data de adesão/admissão:</span> <span class='vdata wd10em'>{{DataAdesao}}</span></span>
+		<p style="height:30px;width:90%"><span class='Observacoes'><span>Observações:</span>
+			<span class='vtexto wdFull'>{{Observacoes}}</span></span>
+			<br/><span class='AssinaturaCooperado'><span>Assinatura do cooperado:</span> <span class='vtexto wd30em'>{{AssinaturaCooperado}}</span></span>
+			<br/><span class='Testemunhas'><span>Testemunhas (RG, CPF, nome e assinatura):</span><span class='estrutura'>{{Testemunhas}}</span></span>
+		</p>
+
+		<div class="blk">Termo de Demissão:
+			<blockquote class="box">
+				<span class='Motivos'><span>Motivos:</span> <span class='vtexto wd30em'>{{Motivos}}</span></span>
+				<br/><span class='DemObs'><span>Observações:</span> <span class='vtexto wd30em'>{{DemObs}}</span></span>
+				<br/><span class='DataDemissao'><span>Data demissão:</span> <span class='vdata wd10em'>{{DataDemissao}}</span></span>
+				<br/><span class='DemAss'><span>Assinatura:</span> <span class='vtexto wd30em'></span></span>
+			</blockquote>
+		</div>
+
+
+
+
+<!-- box com fundo https://wdrp.name-services.com/whois/wdrp.aspx?key=DA1FFB24-8EEF-4647-9813-0F718B470564 -->
+
+		<div class="blk">Dados atualizados em ?/?/2016:
+			<blockquote class="box">
+			<span class='Idade'><span>Idade:</span> <span class="vinteger wd03em">{{Idade}}</span></span>
+
+			&#160;<span class='Naturalidade'><span>Naturalidade:</span> <span class="vtexto wd10em">{{Naturalidade}}</span></span>
+			&#160;&#160; <span class='EstadoCivil'><span>Estado Civil:</span> <span class='vtexto wd10em'>{{EstadoCivil}}</span></span>
+			<br/><span class='Profissao'><span>Profissao:</span> <span class='vtexto wd10em'>{{Profissao}}</span></span>
+			&#160;<span class='GrauInstrucao'><span>Grau de instrução:</span> <span class='vtexto wd10em'>{{grauInstrucao}}</span></span>
+			<br/>Endereço residencial:
+			<br/> &#160; <span class='vtexto'>{{Endereco-logradouro-tipo}}. {{Endereco-logradouro-nome}}, nº{{Endereco-logradouro-num}}</span>  &#160; • &#160; CEP <span class='vtexto'>{{Endereco-cep}}</span> &#160; • &#160; <span class='vtexto'>{{Endereco-cidade}}, {{Endereco-uf}}</span>
+		</blockquote>
+	</div>
+
+	<div class="blk">Demais documentos:
+		<blockquote class="box">...  Identidade: {{rg_num}} ({{rg_exp}}), ... PIS: ...
+
+		</blockquote>
+	</div>
+	<p>Dependentes: {{dependentes-qt}}</p>
+
 
 </section>
 
-<section id='bloco-2'><h2>Documentos do cooperado</h2>
-	<span class='Rg'><span>RG:</span><span class='estrutura'>{{Rg}}</span></span>
-	<br/><span class='Cpf'><span>CPF:</span><span class='codigo'>{{Cpf}}</span></span>
-	<br/><span class='CarteiraProfissional'><span>Carteira profissional:</span><span class='estrutura'>{{CarteiraProfissional}}</span></span>
-	<br/><span class='CertidaoNascimento'><span>Certidão de Nascimento/Casamento:</span><span class='codigo'>{{CertidaoNascimento}}</span></span>
-	<br/><span class='Pis'><span>PIS:</span><span class=''>{{Pis}}</span></span>
-	<br/><span class='TituloEleitor'><span>Título de eleitor:</span><span class='estrutura'>{{TituloEleitor}}</span></span>
-  </section>
 
-<section id='bloco-3'><h2>Dependentes</h2>
-	<table boder='1'>
-		<thead>
-		  <tr><th>Nome do dependente</th> <th>Data de nascimento</th></tr>
-		</thead>
-		<tbody>
-		{{#bloco3}}
-		<tr>
-			<td class='texto'>{{NomeDependente}}</td>
-			<td class='data'><time>{{DataNascimento}}</time></td>
-		</tr>
-		{{/bloco3}}
-		</tbody>
-	</table>
-</section>
-
-<section id='bloco-4'><h2>Conta Corrente Capital</h2>
-<table boder='1'>
-	<thead>
-	  <tr><th rowspan='2'>Data</th> <th rowspan='2'>Histórico das subscrições de quotas-parte</th>
-	      <th colspan='3'>Movimento de Capital Social</th>
-	  </tr>
-	  <tr><th>Subscrito</th> <th>Realizado</th> <th>Saldo</th></tr>
-	</thead>
-	<tbody>
-	{{#bloco4}}
-	<tr>
-		<td class='data'><time>{{Data}}</time></td>
-		<td class='texto'>{{HistoricoSubscricoesQP}}</td>
-		<td class='real'>{{Subscrito}}</td>
-		<td class='real'>{{Realizado}}</td>
-		<td class='real'>{{Saldo}}</td>
-	</tr>
-	{{/bloco4}}
-	</tbody>
-</table>
-</section>
 
 </article>

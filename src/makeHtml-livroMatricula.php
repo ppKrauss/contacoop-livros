@@ -99,7 +99,8 @@ parece ser melhor que https://www.w3.org/Style/Examples/007/leaders.en.html
 	.vtexto, .vdata, .vinteger {
 		font-style: italic;
 	}
-
+  .wdFull { width: 100%; display: inline-block;}
+  .wd50em { width: 55ex; display: inline-block;}
 	.wd30em { width: 35ex; display: inline-block;}
 	.wd25em { width: 25ex; display: inline-block;}
 	.wd15em { width: 15em; display: inline-block;}
@@ -107,7 +108,8 @@ parece ser melhor que https://www.w3.org/Style/Examples/007/leaders.en.html
 	.wd05em { width: 5em;  display: inline-block;}
 	.wd03em { width: 3em;  display: inline-block;}
 
-	.wd30em:empty, .wd15em:empty, .wd25em:empty,
+	.wdFull:empty,
+  .wd30em:empty, .wd15em:empty, .wd25em:empty,
 	.wd10em:empty, .wd05em:empty,
 	.wd03em:empty { /* lacuna */
 		border-bottom:1pt dashed #222;
@@ -136,7 +138,7 @@ parece ser melhor que https://www.w3.org/Style/Examples/007/leaders.en.html
 		margin:  0;
 	}
   .FotoCooperado img {
-		width:   240px;
+		width:   200px;
 	}
 
 	section.dados {
@@ -145,6 +147,7 @@ parece ser melhor que https://www.w3.org/Style/Examples/007/leaders.en.html
 	section.dados h1, section.dados h2 {
 		color:#466;
 	}
+  section.dados h1 { font-size: 175%; }
 
   div.blk {
     margin-top:1.6em;
@@ -184,7 +187,7 @@ parece ser melhor que https://www.w3.org/Style/Examples/007/leaders.en.html
   $m = new Mustache_Engine(array(
     'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__)."/assets"),
   ));
-  $template = $m->loadTemplate('livroMatricula-artigo2');
+  $template = $m->loadTemplate('livroMatricula-artigo');
 
   foreach (array_values($input) as $r) {
     echo $template->render($r);
