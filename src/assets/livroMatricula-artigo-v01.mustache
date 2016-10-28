@@ -20,12 +20,13 @@
 		</td>
 		</tr></table>
 
-		<span class='DataAdesao'><span>Data de adesão/admissão:</span> <span class='vdata wd10em'>{{DataAdesao}}</span></span>
-		<p style="height:30px;width:90%"><span class='Observacoes'><span>Observações:</span>
-			<span class='vtexto wdFull'>{{Observacoes}}</span></span>
-			<br/><span class='AssinaturaCooperado'><span>Assinatura do cooperado:</span> <span class='vtexto wd30em'>{{AssinaturaCooperado}}</span></span>
-			<br/><span class='Testemunhas'><span>Testemunhas (RG, CPF, nome e assinatura):</span><span class='estrutura'>{{Testemunhas}}</span></span>
-		</p>
+		<div class="blk"><span class='DataAdesao'><span>Data de adesão/admissão:</span> <span class='vdata wd10em'>{{DataAdesao}}</span></span>
+			<blockquote class="box">
+				<span class='AdesaoObs'><span>Observações:</span> <span class='vtexto wd30em'>{{Observacoes}}</span></span>
+				<br/><span class='AssinaturaCooperado'><span>Assinatura do cooperado:</span> <span class='vtexto wd30em'>{{AssinaturaCooperado}}</span></span>
+				<br/><span class='Testemunhas'><span>Testemunhas (RG, CPF, nome e assinatura):</span><span class='estrutura'>{{Testemunhas}}</span></span>
+			</blockquote>
+		</div>
 
 		<div class="blk">Termo de Demissão:
 			<blockquote class="box">
@@ -36,10 +37,11 @@
 			</blockquote>
 		</div>
 
-
-
-
-<!-- box com fundo https://wdrp.name-services.com/whois/wdrp.aspx?key=DA1FFB24-8EEF-4647-9813-0F718B470564 -->
+		<div class="blk">Demais documentos:
+			<blockquote class="box">...  Identidade: {{rg_num}} ({{rg_exp}}), ... PIS: {{Pis}}...
+				CarteiraProfissional: {{CarteiraProfissional}}...		CertidaoNascimento...		TituloEleitor
+			</blockquote>
+		</div>
 
 		<div class="blk">Dados atualizados em ?/?/2016:
 			<blockquote class="box">
@@ -51,19 +53,73 @@
 			&#160;<span class='GrauInstrucao'><span>Grau de instrução:</span> <span class='vtexto wd10em'>{{grauInstrucao}}</span></span>
 			<br/>Endereço residencial:
 			<br/> &#160; <span class='vtexto'>{{Endereco-logradouro-tipo}}. {{Endereco-logradouro-nome}}, nº{{Endereco-logradouro-num}}</span>  &#160; • &#160; CEP <span class='vtexto'>{{Endereco-cep}}</span> &#160; • &#160; <span class='vtexto'>{{Endereco-cidade}}, {{Endereco-uf}}</span>
+			{{^dependentes-qt}}<br/>Dependentes: nenhum dependente.{{/dependentes-qt}}
+			{{#dependentes-qt}}
+			<br/><b>{{dependentes-qt}} dependentes</b>:
+			<table class="dependentes" border="1" width="100%">
+			<thead>
+			<tr>
+				<td width="10%">Nascimento</td>
+				<td width="15%">RG</td>
+				<td>Nome</td>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td class="s2" dir="ltr">...</td>
+				<td class="s2" dir="ltr">...</td>
+				<td class="s2" dir="ltr">...</td>
+			</tr>
+			<tr>
+				<td class="s2" dir="ltr">...</td>
+				<td class="s2" dir="ltr">...</td>
+				<td class="s2" dir="ltr">...</td>
+			</tr>
+			</tbody>
+			</table>
+			{{/dependentes-qt}}
 		</blockquote>
 	</div>
-
-	<div class="blk">Demais documentos:
-		<blockquote class="box">...  Identidade: {{rg_num}} ({{rg_exp}}), ... PIS: ...
-
-		</blockquote>
-	</div>
-	<p>Dependentes: {{dependentes-qt}}</p>
-
 
 </section>
 
+<section id='bloco-4' class="dados"><h2>Conta Corrente Capital</h2>
+Valor da quota-parte: <b><i>R$ .....</i></b>
+<br/>
 
+<table class="saldo1" border="1" width="100%">
+<thead>
+<tr>
+	<td class="s0" dir="ltr" rowspan="2">Data</td>
+	<td class="s0" dir="ltr" rowspan="2">Histórico das subscrições de quotas-parte</td>
+	<td class="s1" dir="ltr" colspan="3">Movimento de Capital Social</td>
+</tr>
+<tr>
+	<td class="s2" dir="ltr">Subscrito</td>
+	<td class="s2" dir="ltr">Realizado</td>
+	<td class="s2" dir="ltr">Saldo</td>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td>dt1</td>
+	<td>hist1</td>
+	<td>sbs1</td> <td>rld1</td> <td>sld1</td>
+</tr>
+<tr>
+	<td>dt2</td>
+	<td>hist2</td>
+	<td>sbs2</td> <td>rld2</td> <td>sld2</td>
+</tr>
+<tr>
+	<td>...</td>
+	<td>...</td>
+	<td>...</td> <td>...</td> <td>...</td>
+</tr>
+</tbody>
+</table>
+
+</section>
 
 </article>

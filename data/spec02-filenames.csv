@@ -1,0 +1,8 @@
+Campo,Descrição,Exemplo1,Exemplo2,Ex1-formatado,Ex2-formatado
+jurisdição-uf,UF (estado) da jurisdição adotada pelo empreendimento,SP,MG,br-sp,br-mg
+autoridade-tipo,"Autoridade emitente (autor), tipo de empreendimento",Cooperativa,Condomínio,cooperativa,condominio
+autoridade-nome,Nome do empreendimento (sem o tipo),MetalCooper,Condo-Dix,metalcooper,condo_dix
+autoridade,Tipo e nome,Cooperativa; MetalCooper,Condomínio; Condo-Dix,cooperativa-metalcooper,condominio-condo_dix
+documento-tipo,Nome genérico do tipo de documento,Ata,Estatuto,ata,estatuto
+documento-data,Data de publicação ou autoria (expressa) do documento.,Maio de 2002,20/06/2015,2002-05-01,2015-06-05
+documento-descritor,Descritor complementar,Retificação,(nada),retificacao,

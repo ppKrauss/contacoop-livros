@@ -4,19 +4,21 @@
 
 $opt = [
   // revisar com '' visto que opcional vazio é false, e value vazio não passa nada.
+    'e'=>true,  // use EDI (reconfigurar array quando for usar)
     'j'=>true,  // saidas json
+    'c'=>true,  // usar com -e para saida CSV
     'd'=>true,  // $debugResto, 1=1linha, 2=2 linhas, etc.
     'v'=>true,  // validar dados brutos, 1=tudo, 2=filtrado
-    'e'=>true,  // use EDI (reconfigurar array quando for usar)
     'h'=>true,  // help
 ];
-$opt   = array_merge( $opt, getopt("jd:v:eh") );
+$opt   = array_merge( $opt, getopt("jd:v:ehc") );
 $optNo = array_reduce( $opt, function($c,$x){$c = $c&&($x===true); return $c;}, true ); // !==''
 
 if ($optNo || !$opt['h']) die(<<<EOT
   ---- Make Intermediary Data ----
   OPITIONS:
-  -j saidas json;
+  -j saida json para opcao -e;
+  -c saida CSV para opcao -e
   -v comando validar dados para CSV, 1=full, 2=filtrado;
   -e comando use EDI;
   -d comando debug 1,2,...N, para o resto (sem EDI);
@@ -84,6 +86,8 @@ $EDI_tipo = [  // obtido do parser de variaveis no makeTpl.php
   'rg_num' => 'string-rgNum',
   'rg_exp' => 'string-rgExp',
   'dependentes-qt' => 'integer',
+  'Endereco-logradouro-tipo'=>'string-tr_upper',
+  'Endereco-logradouro-nome'=>'string-tr_upper',
 ];
 
 $c= new getCoops();
@@ -111,12 +115,35 @@ if ($opt['d']!==true) {  // gera planilha para preencher EDI.CSV
   } // for
   die("\n");
 } elseif (!$opt['j'] && !$opt['e'])
-  echo json_encode($coopBlocks);
-elseif (!$opt['e'])
-  var_export($coopBlocks);
+  echo json_encode($coopBlocks,JSON_PRETTY_PRINT);
+elseif (!$opt['e'] && !$opt['c']) {
+  $um = 1;
+  $stdout = fopen('php://stdout','w');
+  foreach($coopBlocks as $r){
+    if ($um) {
+      $x=array_keys($r);
+      $x[]='arquivo-foto';
+      fputcsv($stdout,$x);
+      $um = 0;
+    }
+    $x=array_keys($r);
+    $aux = fotoFilename($r['NomeCooperado']);
+    $x[]=$aux;
+    fputcsv($stdout,$r);
+  }
+  fclose($stdout);
+
+} elseif (!$opt['e']) {
+  //var_export($coopBlocks);
+  foreach($coopBlocks as $r){
+    $aux = fotoFilename($r['NomeCooperado']);
+    echo "\n$aux,{$r['cpf']},{$r['matricula']},{$r['NomeCooperado']}";
+  }
+}
 else
   echo "ERRO, sem opção de comando. Use -h\n";
-//die(json_encode($EDI));
+
+//die("\nEDI.json=\n".json_encode($EDI,JSON_PRETTY_PRINT));
 
 
 
@@ -168,6 +195,10 @@ class getCoops {
           ;
         } // foreach
         // $rec0['etcFuncional']: funcionais como idade(nascimento,dataRef)
+        $rec0['Idade'] = 2015 - (int) preg_replace('#^\d\d/\d\d/#','',$rec0['DataNascimento']);
+        $ft = $rec0['Foto'] = fotoFilename($rec0['NomeCooperado']);
+        if (!file_exists(__DIR__."/assets/_local/fotos-cooperados/$ft"))
+          $rec0['Foto'] = "";
         if ($useDump) $rec0['dump']=$r;
         if (  !$filt_lst || in_array($rec0[$filt_key],$filt_lst)  )
           $rec[] = $rec0;
@@ -293,6 +324,8 @@ function validar_cpf($cpf,$clean=true) {
 	if ($clean)
     $cpf = preg_replace('/[^0-9]/', '', (string) $cpf); // \D
   else $cpf = (string) $cpf;
+  if (strlen($cpf) == 10) $cpf = "0$cpf";
+
 	if (strlen($cpf) != 11 || $cpf == '00000000000' ||
         $cpf == '11111111111' ||
         $cpf == '22222222222' ||
@@ -374,6 +407,8 @@ function formatar($val,$tipo,$tipoDefault='nada') {
     case 'integer':       return preg_replace('/[^\d]+/','',$val);
     case 'string-nomePtBR':  return format_nomePtBR($val);
     case 'string-trim':  return trim($val);
+    case 'string-upper':  return mb_strtoupper(trim($val),'UTF-8');
+    case 'string-tr_upper':  return mb_strtoupper(trim($val),'UTF-8');
     case 'nada':
     default:             return $val;
   }
@@ -406,5 +441,13 @@ function format_nomePtBR($val, $stdSufix=true, $useOthers=true) {
       )
   ;
   return join(' ',$r);
+}
+
+function fotoFilename($nome) {
+  $ps = explode(' ',$nome);
+  $pnome = $ps[0];
+  $sobrenome = array_pop($ps);
+  $aux = iconv('utf-8', 'ascii//TRANSLIT', "$pnome$sobrenome"); // desacent
+  return "$aux.jpg";
 }
 ?>

@@ -1,0 +1,183 @@
+<!-- LEMBRAR: falta template em formulário como esse exemplo
+http://apps.solumbox.com/2003/4452/SiteForms/MatriculaTitular
+-->
+
+<article id='matricula-{{matricula}}'>
+
+<!-- certo cada campo ser um LI com atributo value-->
+
+<section id='bloco-1' class="dados">
+
+	<table width="100%"><tr>
+		<td>
+			<h1 style="text-align:center">Matrícula de cooperado 1234</h1>
+
+			<span class="campo"><span>Nome:</span> <span title='NomeCooperado' class="vtexto">{{NomeCooperado}}</span></span>
+			&#160;&#160;<span class="campo"><span>Idade em 2015:</span> <span title='Idade' class="vinteger wd03em">{{Idade}}</span></span>
+
+			<br/><span class='campo'><span>Nacionalidade:</span> <span title="DataNascimento-codPais" class="vtexto">{{DataNascimento-codPais}}</span></span>
+			&#160;&#160; <span class='campo'><span>Sexo:</span> <span title="sexo" class='vtexto'>{{sexo}}</span></span>
+			&#160;&#160; <span class='campo'><span>Estado Civil:</span> <span title="EstadoCivil" class='vtexto wd10em'>{{EstadoCivil}}</span></span>
+
+			<br/><span class='campo'><span>Data de nascimento:</span> <span title="DataNascimento" class="vdata wd10em">{{DataNascimento}}</span></span>
+			&#160;&#160;<span class='campo'><span>Naturalidade:</span> <span title="DataNascimento-codIBGE" class="vtexto">{{DataNascimento-codIBGE}}, {{DataNascimento-uf}}</span></span>
+
+			<br/><span class='campo'><span>Profissao (cód. CBO):</span> <span title="Profissao" class='vtexto wd10em'>{{Profissao}}</span></span>
+			&#160;&#160;<span class='campo'><span>Escolaridade:</span> <span title="" class='vtexto wd10em'>{{grauInstrucao}}</span></span>
+			<br/><span class='campo'><span>Nome da mãe:</span> <span title="NomeMae" class='vtexto wd30em'>{{NomeMae}}</span></span>
+			<br/><span class='campo'><span>Nome do pai:</span> <span title="NomePai" class='vtexto wd30em'>{{NomePai}}</span></span>
+		</td>
+		<td width="140" class="FotoCooperado">
+			{{#Foto}}<img src="./src/assets/_local/fotos-cooperados/{{Foto}}"/>{{/Foto}}
+			{{^Foto}}			<img src="./src/assets/_local/john-doe.jpg"/>{{/Foto}}
+		</td>
+		</tr></table>
+
+		<div class="blk"><b>Dados pessoais:</b>
+			<blockquote class="box">
+			<span class='campo'><span>CPF:</span> <span title="cpf" class='vtexto'>{{cpf}}</span></span>
+				&#160;&#160;<span class='campo'><span>RG:</span> <span title="rg_num" class='vtexto'>{{rg_num}}</span></span>
+				&#160;<span class='campo'><span>Orgão Emissor:</span> <span title="rg_num" class='vtexto'>{{rg_exp}}</span></span>
+				&#160;<span class='campo'><span>Data de Emissão:</span> <span title="rg_demis" class='vtexto'>{{rg_demis}}</span></span>
+
+				<br/><span class='campo'><span>CNH:</span> <span title="CNH_num" class='vtexto'>{{CNH_num}}</span></span>
+				&#160;<span class='campo'><span>Orgão Emissor:</span> <span title="rg_num" class='vtexto'>{{CNH_exp}}</span></span>
+				&#160;<span class='campo'><span>Data de Emissão:</span> <span title="rg_demis" class='vtexto'>{{CNH_demis}}</span></span>
+				&#160;<span class='campo'><span>Validade:</span> <span title="CNH_val" class='vtexto'>{{CNH_val}}</span></span>
+				CarteiraProfissional: {{CarteiraProfissional}}...		CertidaoNascimento...
+
+				<br/><span class='campo'><span>Titulo de Eleitor:</span> <span title="titel_num" class='vtexto'>{{titel_num}}</span></span>
+				&#160;			Zona:		&#160;	Seção:
+				<br/>... ... PIS: {{Pis}}...
+				&#160;&#160;Certificado de Dispensa:
+					&#160;&#160;NIT: {{matricula}}
+			</blockquote>
+		</div>
+
+		<div class="blk">Endereço residencial:
+			<blockquote class="box">
+				<span title="Endereco-logradouro-tipo" class='vtexto'>{{Endereco-logradouro-tipo}}. {{Endereco-logradouro-nome}}, nº{{Endereco-logradouro-num}}</span>
+				&#160; • &#160; <span title="Endereco-cidade" class='vtexto'>{{Endereco-cidade}}, {{Endereco-uf}}</span>
+				&#160; • &#160; CEP <span title="Endereco-cep" class='vtexto'>{{Endereco-cep}}</span>
+			</blockquote>
+		</div>
+
+		<div class="blk"><span class='DataAdesao'><span>Data de Admissão:</span> <span title="" class='vdata wd10em'>{{DataAdesao}}</span></span>
+			<blockquote class="box">
+				<span class='AdesaoObs'><span>Observações:</span> <span title="" class='vtexto wd30em'>{{Observacoes}}</span></span>
+				<br/><span class='AssinaturaCooperado'><span>Assinatura do cooperado:</span> <span title="" class='vtexto wd30em'>{{AssinaturaCooperado}}</span></span>
+
+				<pre>Local:	Cidade, 00 de XXXXXXXX de 0000.
+__________________________			  ________________________
+Assinatura do Associado                              Assinatura do Presidente
+
+Testemunhas:
+	1 ______________________________________________
+			Nome                        RG:
+	2 ______________________________________________
+			Nome                        RG:</pre>
+			</blockquote>
+		</div>
+
+		<div class="blk">Termo de Demissão:
+			<blockquote class="box">
+				<span class='Motivos'><span>Motivos:</span> <span title="" class='vtexto wd30em'>{{Motivos}}</span></span>
+				<br/><span class='DemObs'><span>Observações:</span> <span title="" class='vtexto wd30em'>{{DemObs}}</span></span>
+				<br/><span class='DataDemissao'><span>Data demissão:</span> <span title="" class='vdata wd10em'>{{DataDemissao}}</span></span>
+				<br/>Local: 	Cidade, 00 de XXXXXXXX de 0000.
+				<pre>
+____________________________      __________________________________
+Assinatura do Demissionário       Assinatura do Presidente</pre>
+			</blockquote>
+		</div>
+
+
+<!--
+			{{^dependentes-qt}}<br/>Dependentes: nenhum dependente.{{/dependentes-qt}}
+			{{#dependentes-qt}}
+			<br/><b>{{dependentes-qt}} dependentes</b>:
+			<table class="dependentes" border="1" width="100%">
+			<thead>
+			<tr>
+				<td width="10%">Nascimento</td>
+				<td width="15%">RG</td>
+				<td>Nome</td>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td class="s2" dir="ltr">...</td>
+				<td class="s2" dir="ltr">...</td>
+				<td class="s2" dir="ltr">...</td>
+			</tr>
+			<tr>
+				<td class="s2" dir="ltr">...</td>
+				<td class="s2" dir="ltr">...</td>
+				<td class="s2" dir="ltr">...</td>
+			</tr>
+			</tbody>
+			</table>
+			{{/dependentes-qt}}
+-->
+
+</section>
+
+<section id='bloco-4' class="dados">
+
+	<!-- <h2>Conta Corrente de Capital</h2>
+Valor Individual da Quota-Parte: <b><i>R$ .....</i></b>
+<br/>
+-->
+<table class="saldo1" border="1" width="100%">
+<thead>
+	<tr>
+		<td colspan="5" align="center">Conta Corrente de Capital</td>
+	</tr>
+	<tr>
+		<td colspan="5">Valor Individual da Quota-Parte: <b><i>R$ .....</i></b></td>
+	</tr>
+<tr>
+	<td class="s0" dir="ltr" rowspan="2">Data</td>
+	<td class="s0" dir="ltr" rowspan="2">Histórico das subscrições de quotas-parte</td>
+	<td class="s1" dir="ltr" colspan="3">Movimento de Capital Social</td>
+</tr>
+<tr>
+	<td class="s2" dir="ltr">Subscrito</td>
+	<td class="s2" dir="ltr">Integralizado</td>
+	<td class="s2" dir="ltr">Saldo</td>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td>dt1</td>
+	<td>hist1</td>
+	<td>sbs1</td> <td>rld1</td> <td>sld1</td>
+</tr>
+<tr>
+	<td>dt2</td>
+	<td>hist2</td>
+	<td>sbs2</td> <td>rld2</td> <td>sld2</td>
+</tr>
+<tr>
+	<td>...</td>
+	<td>...</td>
+	<td>...</td> <td>...</td> <td>...</td>
+</tr>
+<tr>
+	<td>...</td>
+	<td>...</td>
+	<td>...</td> <td>...</td> <td>...</td>
+</tr>
+
+</tbody>
+</table>
+
+</section>
+
+<section style="padding:50px">
+			Acesso online para a ficha atualizada desta matrícula:xx
+			<div  style="text-align:center"><img width="120" src="./src/assets/qrcExemplo.png"/></div>
+</section>
+
+</article>
