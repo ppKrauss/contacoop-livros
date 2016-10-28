@@ -7,11 +7,12 @@ Projeto de editoração padronizada dos Livros Contábeis de Cooperativas (conta
 
 ## Arquivos e pastas de dados
 
-Organização da pasta local `data/raw` (dados locais e sigilosos): ver [convenções para nomenclatura de arquivos](https://docs.google.com/spreadsheets/d/13pz0MDDlrDdHWLRGi5JRAQIfTJbM0B_T7XGozJ_5e6c/).
+Organização da pasta local `data/raw` (dados locais e sigilosos): 
 
 * Pastas: `{jurisdição-uf}/{autoridade}/{documento-tipo}`
 * Arquivos nas respectivas pastas de `tipo-documento`: `{documento-data}-{documento-descritor}.ext`
 * (somente downloads) Arquivos soltos: `{jurisdição-uf},{autoridade},{documento-tipo},{documento-data}-{documento-descritor}.ext`
+* Detalhes e exemplos de ortografia de cada campo, ver [convenções de nomenclatura nesta planilha](https://docs.google.com/spreadsheets/d/13pz0MDDlrDdHWLRGi5JRAQIfTJbM0B_T7XGozJ_5e6c/).
 
 Formatos preferenciais:
 
