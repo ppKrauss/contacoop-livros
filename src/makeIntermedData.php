@@ -103,7 +103,8 @@ if ($opt['v']!==true) {
 }
 
 if ($opt['d']!==true) $EDI = NULL;
-$coopBlocks = $c->blocks_parse($blk,'e',$rg_coops,'rg_num');
+
+$coopBlocks = $c->blocks_parse($blk,'e',$rg_coops,'rg_num','saldo1',24);
 
 if ($opt['d']!==true) {  // gera planilha para preencher EDI.CSV
   for($nrecs = 0; $nrecs<$opt['d']; $nrecs++){
@@ -157,10 +158,16 @@ class getCoops {
    * @param $blk array blocos.
    * @param $filt_lst array das keys selecionadas ou NULL para pegar tudo.
    * @param $filt_key string chave usada pelo filtro (quando not NULL).
-   * @param $json boolean true para JSON output.
-   * @param $json boolean true para output de mensagens de debug.
    */
-  function blocks_parse($blks,$cmd='validar',$filt_lst=NULL,$filt_key='rg_num',$json=false,$debug=0) {
+  function blocks_parse(
+    $blks,              // input data
+    $cmd='validar',     // optional command or array of keys
+    $filt_lst=NULL,     // valid values for primary key
+    $filt_key='rg_num', // primary key name to $blks filtering
+    $recloop_name='',   // optional record name for loop (tabela saldo1)
+    $recloop_n=0,       // number of itens
+    $debug=0
+  ) {
     global $EDI;
     global $EDI_tipo;
     $useEDI = (count($EDI)>1);
@@ -168,7 +175,7 @@ class getCoops {
     $rec = [];
     $validar = ($cmd=='validar')? true: false;
     for($i=1; $i<=count($blks); $i++) {
-      $r = $blks[$i];
+      $r = $blks[$i]; // raw data
       $r1 = str_getcsv($r[1]);
       $nome = trim($r1[0]);
       if ($validar && $nome) {
@@ -200,6 +207,13 @@ class getCoops {
         if (!file_exists(__DIR__."/assets/_local/fotos-cooperados/$ft"))
           $rec0['Foto'] = "";
         if ($useDump) $rec0['dump']=$r;
+        if ($recloop_name) {
+          // certo passar primeiros vals como parâmetro e usar mesmos campos.
+          $aux = [
+            'data'=>'', 'operacao'=>'', 'subscrito'=>'', 'integralizado'=>'', 'saldo'=>''
+          ];
+          $rec0[$recloop_name] = array_fill(0,$recloop_n,$aux);
+        }
         if (  !$filt_lst || in_array($rec0[$filt_key],$filt_lst)  )
           $rec[] = $rec0;
 

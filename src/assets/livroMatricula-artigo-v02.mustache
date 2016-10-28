@@ -33,6 +33,11 @@ http://apps.solumbox.com/2003/4452/SiteForms/MatriculaTitular
 		</td>
 		</tr></table>
 
+		<div class="qrcode" style="float:right; text-align:right; margin:0; padding:30px 6px 6px 6px;">
+				<img style="width:80px;" src="./src/assets/qrcExemplo.png"/>
+				<br/><small>[atualizações online]</small>
+		</div>
+
 		<div class="blk"><b>Dados pessoais:</b>
 			<blockquote class="box">
 			<span class='campo'><span>CPF:</span> <span title="cpf" class='vtexto'>{{cpf}}</span></span>
@@ -91,35 +96,6 @@ Assinatura do Demissionário       Assinatura do Presidente</pre>
 			</blockquote>
 		</div>
 
-
-<!--
-			{{^dependentes-qt}}<br/>Dependentes: nenhum dependente.{{/dependentes-qt}}
-			{{#dependentes-qt}}
-			<br/><b>{{dependentes-qt}} dependentes</b>:
-			<table class="dependentes" border="1" width="100%">
-			<thead>
-			<tr>
-				<td width="10%">Nascimento</td>
-				<td width="15%">RG</td>
-				<td>Nome</td>
-			</tr>
-			</thead>
-			<tbody>
-			<tr>
-				<td class="s2" dir="ltr">...</td>
-				<td class="s2" dir="ltr">...</td>
-				<td class="s2" dir="ltr">...</td>
-			</tr>
-			<tr>
-				<td class="s2" dir="ltr">...</td>
-				<td class="s2" dir="ltr">...</td>
-				<td class="s2" dir="ltr">...</td>
-			</tr>
-			</tbody>
-			</table>
-			{{/dependentes-qt}}
--->
-
 </section>
 
 <section id='bloco-4' class="dados">
@@ -131,7 +107,7 @@ Valor Individual da Quota-Parte: <b><i>R$ .....</i></b>
 <table class="saldo1" border="1" width="100%">
 <thead>
 	<tr>
-		<td colspan="5" align="center">Conta Corrente de Capital</td>
+		<td colspan="5">Conta Corrente de Capital</td>
 	</tr>
 	<tr>
 		<td colspan="5">Valor Individual da Quota-Parte: <b><i>R$ .....</i></b></td>
@@ -149,35 +125,16 @@ Valor Individual da Quota-Parte: <b><i>R$ .....</i></b>
 </thead>
 
 <tbody>
+{{#saldo1}}
 <tr>
-	<td>dt1</td>
-	<td>hist1</td>
-	<td>sbs1</td> <td>rld1</td> <td>sld1</td>
+	<td>{{data}}</td>
+	<td>{{operacao}}</td>
+	<td>{{subscrito}}</td> <td>{{integralizado}}</td> <td>{{saldo}}</td>
 </tr>
-<tr>
-	<td>dt2</td>
-	<td>hist2</td>
-	<td>sbs2</td> <td>rld2</td> <td>sld2</td>
-</tr>
-<tr>
-	<td>...</td>
-	<td>...</td>
-	<td>...</td> <td>...</td> <td>...</td>
-</tr>
-<tr>
-	<td>...</td>
-	<td>...</td>
-	<td>...</td> <td>...</td> <td>...</td>
-</tr>
-
+{{/saldo1}}
 </tbody>
 </table>
 
-</section>
-
-<section style="padding:50px">
-			Acesso online para a ficha atualizada desta matrícula:xx
-			<div  style="text-align:center"><img width="120" src="./src/assets/qrcExemplo.png"/></div>
 </section>
 
 </article>

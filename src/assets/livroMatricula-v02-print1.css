@@ -1,0 +1,193 @@
+/**
+ * Layput geral do livro de matrícula, mídia para impressão e PDF.
+ */
+
+/* @media print */
+
+@page {
+  size:   A4 portrait;
+  font-family: Helvetica;
+  border-bottom: thin solid #644;
+
+  @bottom {
+    font-size: 9pt;
+    font-family: Verdana;
+    vertical-align: top;
+    color:#644;
+    margin: 1mm;
+  }
+
+  @bottom-right {
+      font-size: 9pt;
+      font-family: Verdana;
+      vertical-align: top;
+      color:#644;
+      margin: 1mm;
+    }
+
+  @bottom-left {
+      font-size: 9pt;
+      font-family: Verdana;
+      vertical-align: top;
+      color:#644;
+      margin: 1mm;
+    }
+    /* content nbsp = \00a0 */
+}
+
+@page:first {
+  border-top: none;
+  border-bottom: none;
+  @bottom {
+    content: normal;
+  }
+}
+
+@page:left {
+  margin: 1.0cm 1.5cm 1.0cm 1.0cm;
+
+  @bottom-left {
+    content: counter(page);
+    text-align: outside;
+  }
+
+  @bottom-center {
+    content: "PLASTCOOPER";
+  }
+  @bottom-right {
+    content: "Seno&Coseno";
+  }
+
+}
+
+@page:right {
+  margin: 1.0cm 1.0cm 1.0cm 1.5cm;
+  @bottom-right {
+    content: counter(page);
+    text-align: outside;
+  }
+  @bottom-center {
+    content: "Livro de Matrícula de Cooperado";
+  }
+  @bottom-left {
+    content: "Seno&Coseno";
+  }
+}
+
+/* * * * * * */
+
+body {
+  font-family: Helvetica;
+  font-size: 8pt;
+    /* background-color: lightblue; */
+}
+
+.vtexto, .vdata, .vinteger {
+	font-style: italic;
+  font-family: Helvetica;
+}
+.wdFull { width: 100%; display: inline-block;}
+.wd50em { width: 55ex; display: inline-block;}
+.wd30em { width: 35ex; display: inline-block;}
+.wd25em { width: 25ex; display: inline-block;}
+.wd15em { width: 15em; display: inline-block;}
+.wd10em { width: 8em;  display: inline-block;}
+.wd05em { width: 5em;  display: inline-block;}
+.wd03em { width: 3em;  display: inline-block;}
+
+.wdFull:empty,
+.wd30em:empty, .wd15em:empty, .wd25em:empty,
+.wd10em:empty, .wd05em:empty,
+.wd03em:empty { /* lacuna */
+	border-bottom:1pt dashed #222;
+}
+
+section {
+	font-size: 9pt;
+}
+section p, section td, blockquote {
+  line-height:150%;
+}
+
+
+#bloco-4 table,
+table.dependentes {
+    border-collapse: collapse;
+}
+#bloco-4 td,
+table.dependentes td {
+    border: 1px solid #333;
+    padding: 2pt;
+}
+#bloco-4 thead td {
+  font-weight: bold;
+}
+#bloco-4 thead tr:nth-child(2) td {
+  font-weight: normal;
+}
+
+/*.box,*/
+#bloco-4 table  {
+	margin:0 auto;
+	border:4px solid #577;
+	background-color:#FFF;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+}
+
+
+#bloco-4 thead tr:first-child {
+  color:#466;
+  font-size: 125%;
+  text-align:center;
+}
+
+
+
+#bloco-4 tbody tr {
+  height: 1cm;
+}
+
+
+.box {
+	padding:16px;
+}
+
+/* Demais formatações */
+.FotoCooperado {
+	padding: 2px;
+	margin:  0;
+}
+.FotoCooperado img {
+	width:   134px;
+}
+
+section.dados {
+	/*width:30em; text-align:justify; word-spacing:1em; */
+}
+section.dados h1, section.dados h2 {
+	color:#466;
+}
+section.dados h1 { font-size: 175%; }
+
+div.blk {
+  margin-top:1.6em;
+}
+
+div.blk blockquote {
+  margin-top:2pt;
+}
+
+.campo span:first-child,
+.qrcode {
+  color:#444;
+}
+
+article { page-break-after: always; }
+
+/*
+  article.capa { background-color: red; }
+  article.ata { background-color: blue; }
+*/
+section#bloco-4 {  page-break-before: always; }

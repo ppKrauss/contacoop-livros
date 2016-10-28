@@ -9,198 +9,24 @@ ou usar   background-image:linear-gradient(to right, #fff 5px, transparent 1px),
   background-size: 20px 30px;
 
 parece ser melhor que https://www.w3.org/Style/Examples/007/leaders.en.html
-
  -->
+
+ <style>
   <?php
   // paged com http://www.princexml.com/samples/webarch/forprint.css
   // ver PDF e HTML em http://www.princexml.com/samples/#webarch
-  echo "<style>
-
-
-@media screen and (min-width: 480px) {
-  body {
-      background-color: lightblue;
-  }
-
-  /* controle básico dos campos */
-	.vtexto, .vdata, .vinteger {
-		font-style: italic;
-	}
-
-	.wd30em { width: 35ex; display: inline-block;}
-	.wd15em { width: 15em; display: inline-block;}
-	.wd10em { width: 8em; display: inline-block;}
-	.wd05em { width: 5em;  display: inline-block;}
-	.wd03em { width: 3em;  display: inline-block;}
-	.wd30em:empty, .wd15em:empty,
-	.wd10em:empty, .wd05em:empty,
-	.wd03em:empty { /* lacuna */
-		border-bottom:1pt dashed #222;
-	}
-
-	section {font-size: 14pt;}
-	section p {line-height:150%;}
-
-	/* Demais formatações */
-	.FotoCooperado {
-		padding: 2px;
-		margin:  0;
-	}
-  .FotoCooperado img {
-		width:   340px;
-	}
-
-	section.dados {
-		width:58em;
-		/*text-align:justify; word-spacing:1em; */
-	}
-	section.dados h1, section.dados h2 {
-		color:#466;
-	}
-} /* fim media screen */
+  echo "\n@media screen and (min-width: 480px) {\n";
+  echo file_get_contents(__DIR__.'/assets/livroMatricula-v02-screen1.css');
+  echo "
+}
 
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = */
 
-@media print {
-  @page {
-    size:   A4 portrait;
-    margin: 0.5cm 0.5cm 0.9cm 2cm;
-    border-bottom: thin solid black;
-    font-face: Helvetica;
-    @bottom-right {
-      /* background-color:red; */
-      font-size: 10pt;
-      content: counter(page);
-      vertical-align: top;
-      text-align: outside;
-      margin: 1mm
-    }
-    @top-center {
-      content: \"PLASTCOOPER\";
-      font-size:9pt;
-      color: red;
-    }
-/* \\00a0 \\00a0 •\\00a0 \\00a0  Livro de Matrícula de Cooperado*/
-  }
-  @page :first {
-    border-top: none;
-    border-bottom: none;
-    @bottom {
-      content: normal;
-    }
-  }
-
-
-  body {
-    font-family: Helvetica;
-    font-size: 8pt;
-      /* background-color: lightblue; */
-  }
-
-	.vtexto, .vdata, .vinteger {
-		font-style: italic;
-    font-family: Helvetica;
-	}
-  .wdFull { width: 100%; display: inline-block;}
-  .wd50em { width: 55ex; display: inline-block;}
-	.wd30em { width: 35ex; display: inline-block;}
-	.wd25em { width: 25ex; display: inline-block;}
-	.wd15em { width: 15em; display: inline-block;}
-	.wd10em { width: 8em;  display: inline-block;}
-	.wd05em { width: 5em;  display: inline-block;}
-	.wd03em { width: 3em;  display: inline-block;}
-
-	.wdFull:empty,
-  .wd30em:empty, .wd15em:empty, .wd25em:empty,
-	.wd10em:empty, .wd05em:empty,
-	.wd03em:empty { /* lacuna */
-		border-bottom:1pt dashed #222;
-	}
-
-	section {
-		font-size: 9pt;
-	}
-	section p, section td, blockquote {
-    line-height:150%;
-  }
-
-
-  #bloco-4 table,
-  table.dependentes {
-      border-collapse: collapse;
-  }
-  #bloco-4 td,
-  table.dependentes td {
-      border: 1px solid #333;
-      padding: 2pt;
-  }
-  #bloco-4 thead td,
-  table.dependentes thead td {
-    font-weight: bold;
-  }
-
-  /*.box,*/
-  #bloco-4 table  {
-  	margin:0 auto;
-  	border:4px solid #577;
-  	background-color:#FFF;
-  	-moz-border-radius:5px;
-  	-webkit-border-radius:5px;
-  	border-radius:5px;
-  }
-  .box {
-  	padding:16px;
-  }
-
-	/* Demais formatações */
-  .FotoCooperado {
-		padding: 2px;
-		margin:  0;
-	}
-  .FotoCooperado img {
-		width:   134px;
-	}
-
-/*margin:2pt;
-border: 1px solid red;
-  background-color: lightblue;
-
-}
-*/
-
-	section.dados {
-		/*width:30em; text-align:justify; word-spacing:1em; */
-	}
-	section.dados h1, section.dados h2 {
-		color:#466;
-	}
-  section.dados h1 { font-size: 175%; }
-
-  div.blk {
-    margin-top:1.6em;
-  }
-
-  div.blk blockquote {
-    margin-top:2pt;
-  }
-
-  .campo span:first-child {
-    color:#444;
-  }
-
-
-  article { page-break-after: always; }
-
-  /*
-    article.capa { background-color: red; }
-    article.ata { background-color: blue; }
-  */
-  section#bloco-4 {  page-break-before: always; }
-
-} /* fim media print */
-
-  </style>";
-  ?>
+@media print {\n";
+  echo file_get_contents(__DIR__.'/assets/livroMatricula-v02-print1.css');
+  echo "\n}";
+?>
+</style>
 
  </head>
 
@@ -228,6 +54,9 @@ border: 1px solid red;
   <br/>CNPJ 003.852.353/0001-08
   <br/>plastcooper@plastcooper.com.br  (dominio na Locaweb sob responsabilidade de Marcos Silva da http://gvfinfo.com.br/)
   <br/>
+  <br>Rua Eugênia Sá Vitalle, 883 • Taboão - São Bernardo do Campo - SP • CEP 09665-000
+  <br/>Tel/Fax. (11) 4173-3594 • E-mail: adm@plastcooper.com.br
+
 
   <hr/>
   ...
