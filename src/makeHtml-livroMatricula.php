@@ -82,7 +82,12 @@ parece ser melhor que https://www.w3.org/Style/Examples/007/leaders.en.html
   <p><font face="Calibri" size="3">A Assembleia Geral Extraordinária teve início às 11 horas, em terceira convocação, com a seguinte ordem do dia: 1º Alteração do Estatuto Social e aprovação do Regimento Interno; 2º</font><font face="Arial" size="2"><i> </i></font><font face="Calibri" size="3">Prestação de contas do exercício de 2015; 3º Eleição dos membros do Conselho Fiscal e 4º Eleição dos membros da Diretoria.</font></p>
   <p><font face="Calibri" size="3">Dando início aos trabalhos o Sr. Francisco Inácio da Costa, Presidente da Coopecent ABC, deu as boas vindas aos participantes, fez a leitura da ordem do dia e convidou a mim, Cleide Fiore, colaboradora da Coopecent ABC, para secretariar a reunião. Em seguida passou a palavra para a senhora Patrícia Frazão da Silva Santos, Tesoureira da Coopecent ABC, que agradeceu a presença de todos, fez considerações sobre o momento atual enfatizando a necessidade das cooperativas integrantes da Coopecent ABC se organizarem, para exigir das Prefeituras a contratação pelos serviços prestados de coleta seletiva, conforme determina a Política Nacional de Resíduos Sólidos. Patrícia, salientou que dois municípios do ABCDMRR já haviam realizado a contratação, Ribeirão Pires e São Caetano do Sul, e os demais também deveriam seguir o mesmo caminho. Inclusive, segundo Patrícia, o Ministério Público e as Defensorias Públicas do ABC, já estão atuando para fazer com que os municípios cumpram a legislação vigente e contratem as cooperativas de catadores e catadoras de suas cidades.</font></p>
 </article>
-
+<?php
+$f = '/home/peter/gits/contacoop-livros/data/raw/br-sp/cooperativa-coopcent_abc/estatuto/asArticle.htm';
+$htm = file_get_contents($f);
+echo $htm;
+ ?>
+ 
  <?php
  // use "composer update" in the same folder of json.
   require  __DIR__.'/vendor/mustache/mustache/src/Mustache/Autoloader.php';

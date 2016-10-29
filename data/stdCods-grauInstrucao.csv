@@ -1,0 +1,14 @@
+grau,Nome
+1,"Analfabeto, inclusive o que, embora tenha recebido instrução, não se alfabetizou."
+2,Até o 5º ano incompleto do ensino fundamental (antiga 4ª série) que se tenha alfabetizado sem ter frequentado escola regular.
+3,5º ano completo do ensino fundamental.
+4,Do 6º ao 9º ano do ensino fundamental incompleto (antiga 5ª à 8ª série).
+5,Ensino Fundamental Completo
+6,Ensino Medio Incompleto 
+7,Ensino Médio Completo
+0,Ensino Superior Incompleto
+9,Ensino Superior completo
+10,Pos Graduação/Especialização
+11,Mestrado
+12,Doutorado
+13,Pós Doutorado

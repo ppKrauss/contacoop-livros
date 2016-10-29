@@ -191,3 +191,8 @@ article { page-break-after: always; }
   article.ata { background-color: blue; }
 */
 section#bloco-4 {  page-break-before: always; }
+
+
+article div.twocol {
+  columns:2;
+}
