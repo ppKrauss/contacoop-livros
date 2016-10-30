@@ -38,10 +38,9 @@ foreach($csv as $r) {
 
 /////////////////////////////
 
-$EDI = [  // obtido do EDI.CVS já preenchido
+$EDI = [  // obtido do EDI.CVS já preenchido, php src/makeTpl.php matricula-vars
   // FALTA parser indicar tipo/subtipo, ex. 'cpf' => 'l23c1#string-cpf','Endereco-codIBGE' => 'l23c1#string-codIBGE',
   'matricula' => 'l1c4',
-  'NomeCooperado' => 'l1c0',
   'Endereco-logradouro-tipo' => 'l3c1',
   'Endereco-logradouro-nome' => 'l3c4',
   'Endereco-logradouro-num' => 'l3c8',
@@ -53,6 +52,7 @@ $EDI = [  // obtido do EDI.CVS já preenchido
   'email' => 'l9c4',
   'sexo' => 'l11c1',
   'EstadoCivil' => 'l11c2',
+  'codRacaCor' => 'l11c4',
   'grauInstrucao' => 'l11c6',
   'NomePai' => 'l13c1',
   'NomeMae' => 'l13c5',
@@ -63,7 +63,11 @@ $EDI = [  // obtido do EDI.CVS já preenchido
   'cpf' => 'l23c1',
   'rg_num' => 'l23c3',
   'rg_exp' => 'l23c5',
+  'residPropria' => 'l29c1',
+  'codCBO' => 'l46c7',
+  'codCategoriaX' => 'l49c7',
   'dependentes-qt' => 'l50c1',
+  'codRetencao' => 'l52c1',
 ];
 
 $EDI_tipo = [  // obtido do parser de variaveis no makeTpl.php

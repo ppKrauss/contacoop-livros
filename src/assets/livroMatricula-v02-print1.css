@@ -83,7 +83,6 @@ body {
 }
 
 .vtexto, .vdata, .vinteger {
-	font-style: italic;
   font-family: Helvetica;
 }
 .wdFull { width: 100%; display: inline-block;}
@@ -126,7 +125,7 @@ table.dependentes td {
   font-weight: normal;
 }
 
-/*.box,*/
+.demissao blockquote:first-child,
 #bloco-4 table  {
 	margin:0 auto;
 	border:4px solid #577;
@@ -149,9 +148,8 @@ table.dependentes td {
   height: 1cm;
 }
 
-
 .box {
-	padding:16px;
+	padding:12px;
 }
 
 /* Demais formatações */
@@ -193,6 +191,68 @@ article { page-break-after: always; }
 section#bloco-4 {  page-break-before: always; }
 
 
-article div.twocol {
+article.estatuto div.twocol {
   columns:2;
+  column-gap: 1.8em;
+
+  font-family: Garamond;
+  font-size: 10pt;
+  text-align: justify;
 }
+
+article.estatuto div.twocol p:not(.sec):not(.subsec):not(.subsec2) {
+  margin:0;
+  margin-top: 3pt;
+}
+
+article.estatuto p.sec,
+article.estatuto p.subsec {
+  text-align: left;
+}
+
+article.estatuto p.final {
+  padding-top: 1.5em;
+  text-align: right;
+}
+
+article.estatuto p.sec,
+article.estatuto p.art span:first-child,
+article.estatuto p.par span:first-child {
+  color:#466;
+}
+article.estatuto p.art span:first-child,
+article.estatuto p.par span:first-child {
+  font-weight: bold;
+}
+
+article.estatuto div.twocol p:not(.sec):not(.subsec):not(.subsec2):not(.art)  {
+  margin: 3pt 3pt 3pt 3pt;
+  font-size: 9pt;
+  padding: 0;
+}
+article.estatuto div.twocol p:not(.sec):not(.subsec):not(.subsec2):not(.art):not(.par)  {
+  margin-left: 1em;
+  text-indent: -0.5em;
+}
+article.estatuto p.sec{
+  font-size: 11pt;
+}
+article.estatuto p.sec span,
+article.estatuto p.subsec span {
+  font-style: italic;
+}
+
+article.estatuto p.subsec2 {
+  font-variant: small-caps;
+}
+
+p.sec, p.subsec, p.subsec2 {
+  page-break-after: avoid;
+}
+
+/* falta controlar sec e subsec em
+.content > section {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+}
+*/

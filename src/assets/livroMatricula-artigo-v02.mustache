@@ -33,7 +33,7 @@ http://apps.solumbox.com/2003/4452/SiteForms/MatriculaTitular
 		</td>
 		</tr></table>
 
-		<div class="qrcode" style="float:right; text-align:right; margin:0; padding:30px 6px 6px 6px;">
+		<div class="qrcode" style="font-size: 8pt; float:right; text-align:right; margin:0; padding:30px 6px 6px 6px;">
 				<img style="width:80px;" src="./src/assets/qrcExemplo.png"/>
 				<br/><small>[atualizações online]</small>
 		</div>
@@ -56,9 +56,15 @@ http://apps.solumbox.com/2003/4452/SiteForms/MatriculaTitular
 				<br/>... ... PIS: {{Pis}}...
 				&#160;&#160;Certificado de Dispensa:
 					&#160;&#160;NIT: {{matricula}}
+				<br/>Endereço residencial:
+				<br/> &#160; &#160; <span title="Endereco-logradouro-tipo" class='vtexto'>{{Endereco-logradouro-tipo}}. {{Endereco-logradouro-nome}}, nº{{Endereco-logradouro-num}}</span>
+						&#160; • &#160; <span title="Endereco-cidade" class='vtexto'>{{Endereco-cidade}}, {{Endereco-uf}}</span>
+						&#160; • &#160; CEP <span title="Endereco-cep" class='vtexto'>{{Endereco-cep}}</span>
+					</blockquote>
 			</blockquote>
 		</div>
 
+<!--
 		<div class="blk">Endereço residencial:
 			<blockquote class="box">
 				<span title="Endereco-logradouro-tipo" class='vtexto'>{{Endereco-logradouro-tipo}}. {{Endereco-logradouro-nome}}, nº{{Endereco-logradouro-num}}</span>
@@ -66,8 +72,9 @@ http://apps.solumbox.com/2003/4452/SiteForms/MatriculaTitular
 				&#160; • &#160; CEP <span title="Endereco-cep" class='vtexto'>{{Endereco-cep}}</span>
 			</blockquote>
 		</div>
+-->
 
-		<div class="blk"><span class='DataAdesao'><span>Data de Admissão:</span> <span title="" class='vdata wd10em'>{{DataAdesao}}</span></span>
+		<div class="blk admissao"><span class='DataAdesao'><span>Data de Admissão:</span> <span title="" class='vdata wd10em'>{{DataAdesao}}</span></span>
 			<blockquote class="box">
 				<span class='AdesaoObs'><span>Observações:</span> <span title="" class='vtexto wd30em'>{{Observacoes}}</span></span>
 				<br/><span class='AssinaturaCooperado'><span>Assinatura do cooperado:</span> <span title="" class='vtexto wd30em'>{{AssinaturaCooperado}}</span></span>
@@ -84,7 +91,7 @@ Testemunhas:
 			</blockquote>
 		</div>
 
-		<div class="blk">Termo de Demissão:
+		<div class="blk demissao">Termo de Demissão:
 			<blockquote class="box">
 				<span class='Motivos'><span>Motivos:</span> <span title="" class='vtexto wd30em'>{{Motivos}}</span></span>
 				<br/><span class='DemObs'><span>Observações:</span> <span title="" class='vtexto wd30em'>{{DemObs}}</span></span>
