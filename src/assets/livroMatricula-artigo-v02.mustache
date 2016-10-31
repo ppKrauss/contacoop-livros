@@ -2,7 +2,7 @@
 http://apps.solumbox.com/2003/4452/SiteForms/MatriculaTitular
 -->
 
-<article id='matricula-{{matricula}}'>
+<article id='matricula-{{matID}}'>
 
 <!-- certo cada campo ser um LI com atributo value-->
 
@@ -10,7 +10,7 @@ http://apps.solumbox.com/2003/4452/SiteForms/MatriculaTitular
 
 	<table width="100%"><tr>
 		<td>
-			<h1 style="text-align:center">Matrícula de cooperado 1234</h1>
+			<h1 style="text-align:center">Matrícula de cooperado {{#matID}}000{{matID}}{{/matID}} {{^matID}}1234{{/matID}}</h1>
 
 			<span class="campo"><span>Nome:</span> <span title='NomeCooperado' class="vtexto">{{NomeCooperado}}</span></span>
 			&#160;&#160;<span class="campo"><span>Idade em 2015:</span> <span title='Idade' class="vinteger wd03em">{{Idade}}</span></span>
@@ -53,9 +53,9 @@ http://apps.solumbox.com/2003/4452/SiteForms/MatriculaTitular
 
 				<br/><span class='campo'><span>Titulo de Eleitor:</span> <span title="titel_num" class='vtexto'>{{titel_num}}</span></span>
 				&#160;			Zona:		&#160;	Seção:
-				<br/>... ... PIS: {{Pis}}...
+				<br/>... ... PIS: {{Pis}}=NIT...
 				&#160;&#160;Certificado de Dispensa:
-					&#160;&#160;NIT: {{matricula}}
+					&#160;&#160;NIT: {{matricula}} ... cod CBO={{codCBO}}
 				<br/>Endereço residencial:
 				<br/> &#160; &#160; <span title="Endereco-logradouro-tipo" class='vtexto'>{{Endereco-logradouro-tipo}}. {{Endereco-logradouro-nome}}, nº{{Endereco-logradouro-num}}</span>
 						&#160; • &#160; <span title="Endereco-cidade" class='vtexto'>{{Endereco-cidade}}, {{Endereco-uf}}</span>

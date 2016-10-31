@@ -1,6 +1,11 @@
 <?php
-// usar php src/makeIntermedData.php -e -j > data/raw/livroMatricula-dados.json
-// cooperados-CopPlastcooper.csv  cooperados-tudo-modoBold.csv
+/**
+ *
+ */
+// usar
+//  php src/makeIntermedData.php -e -j > data/raw/livroMatricula-dados.json
+//  php src/makeIntermedData.php -v -c | more
+// saidas cooperados-CopPlastcooper.csv  cooperados-tudo-modoBold.csv
 
 $opt = [
   // revisar com '' visto que opcional vazio é false, e value vazio não passa nada.
@@ -40,7 +45,9 @@ foreach($csv as $r) {
 
 $EDI = [  // obtido do EDI.CVS já preenchido, php src/makeTpl.php matricula-vars
   // FALTA parser indicar tipo/subtipo, ex. 'cpf' => 'l23c1#string-cpf','Endereco-codIBGE' => 'l23c1#string-codIBGE',
+  // novos em 2016-10: residPropria, codCBO, codCategoriaX, codRacaCor.
   'matricula' => 'l1c4',
+  'NomeCooperado' => 'l1c0',  // cuidado não está pegando
   'Endereco-logradouro-tipo' => 'l3c1',
   'Endereco-logradouro-nome' => 'l3c4',
   'Endereco-logradouro-num' => 'l3c8',
