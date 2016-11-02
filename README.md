@@ -27,3 +27,7 @@ Formatos preferenciais:
 * Imagens originais em [JPEG-2000-lossless](http://softwareengineering.stackexchange.com/q/195359/84349),`.jp2`.
 
 * Imagens para visualização online ou derivadas das originais: `.png` ou `.jpg`.
+
+## Etc
+
+Este projeto encontra-se em construção, alguns elementos já se encontram [melhor definidos na Wiki](https://github.com/ppKrauss/contacoop-livros/wiki).
