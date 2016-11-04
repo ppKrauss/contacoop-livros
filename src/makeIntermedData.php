@@ -137,12 +137,13 @@ elseif (!$opt['e'] && !$opt['c']) {
       $x[]='arquivo-foto';
       fputcsv($stdout,$x);
       $um = 0;
-    }
-    $x=array_keys($r);
-    $aux = fotoFilename($r['NomeCooperado']);
-    $x[]=$aux;
-    fputcsv($stdout,$r);
-  }
+    } // if
+    $x=array_values($r);
+// falta map ignorar valores quesão array!
+    $x[]= fotoFilename($r['NomeCooperado']);
+    fputcsv($stdout,$x);
+    {var_dump($x);die("\n??error\n");}
+  } // for
   fclose($stdout);
 
 } elseif (!$opt['e']) {

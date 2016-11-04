@@ -1,73 +1,71 @@
- <!DOCTYPE html>
- <html>
- <head>
- <meta charset="UTF-8">
- <title>NATRICULA COOP</title>
- <!--
-CSS ver http://jsfiddle.net/3oaLd5fn/
-ou usar   background-image:linear-gradient(to right, #fff 5px, transparent 1px),  linear-gradient(#ccc 1px, transparent 1px);
-  background-size: 20px 30px;
+<!DOCTYPE html>
+<html>
+<?php
 
-parece ser melhor que https://www.w3.org/Style/Examples/007/leaders.en.html
- -->
-
- <style>
-  <?php
-  // paged com http://www.princexml.com/samples/webarch/forprint.css
-  // ver PDF e HTML em http://www.princexml.com/samples/#webarch
-  echo "\n@media screen and (min-width: 480px) {\n";
-  echo file_get_contents(__DIR__.'/assets/livroMatricula-v02-screen1.css');
-  echo "
-}
-
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = */
-
-@media print {\n";
-  echo file_get_contents(__DIR__.'/assets/livroMatricula-v02-print1.css');
-  echo "\n}";
+  // CONFIGS:
+  $cssMode='print';
+  $prjPath = dirname(__DIR__);
+  $baseUrnPath = "$prjPath/data/raw";
+  $input = "$prjPath/data/raw/livroMatricula-dados.json";
 
 
-$livroContents = [
-  'org_nameshort'=>'PLASTCOOPER'
-  ,'org_namefull'=>'COOPERATIVA IND. DE TRAB. PLÁSTICOS'
-  ,'org_cnpj'=>'003.852.353/0001-08'
-  ,'org_email'=>'plastcooper@plastcooper.com.br' // (dominio na Locaweb sob responsabilidade de Marcos Silva da http://gvfinfo.com.br/)
-  ,'org_end_rua'=>'Rua Eugênia Sá Vitalle, 883'
-  ,'org_end_bairroCidade'=>'Taboão - São Bernardo do Campo - SP'
-  ,'org_end_cep'=>'09665-000'
-  ,'org_telfax'=>'(11) 4173-3594'
-  ,'org_adm_mail'=>'adm@plastcooper.com.br'
-  ,'org_livro'=>'LvrMtr-01'  // pode ter mais de um pois são permitidas atualizações
-  ,'org_urn'=>'br;sp:cooperativa;plastcooper'
-  ,'livro-matricula'=>[
-    'estatuto'=>'compilado', // usando Coopcent para demo
-    //'ata-fundacao'=>'2016-05-02'  // usando Coopcent para demo
-  ]
-];
-
-$urn_path = urn2path($livroContents['org_urn']);
-$f_path = "/home/peter/gits/contacoop-livros/data/raw/$urn_path";
-
-require  __DIR__.'/vendor/mustache/mustache/src/Mustache/Autoloader.php';
+require  "$prjPath/src/vendor/mustache/mustache/src/Mustache/Autoloader.php";
 Mustache_Autoloader::register();
 $m = new Mustache_Engine;
 $m = new Mustache_Engine(array(
-  'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__)."/assets"),
+  'loader' => new Mustache_Loader_FilesystemLoader("$prjPath/src/assets"),
 ));
 
-$input = __DIR__.'/../data/raw/livroMatricula-dados.json';
+$livroContents = [
+'org_nameshort'=>'PLASTCOOPER'
+,'org_namefull'=>'COOPERATIVA IND. DE TRAB. PLÁSTICOS'
+,'org_cnpj'=>'003.852.353/0001-08'
+,'org_email'=>'plastcooper@plastcooper.com.br' // (dominio na Locaweb sob responsabilidade de Marcos Silva da http://gvfinfo.com.br/)
+,'org_end_rua'=>'Rua Eugênia Sá Vitalle, 883'
+,'org_end_bairroCidade'=>'Taboão - São Bernardo do Campo - SP'
+,'org_end_cep'=>'09665-000'
+,'org_telfax'=>'(11) 4173-3594'
+,'org_adm_mail'=>'adm@plastcooper.com.br'
+,'org_livro'=>'LvrMtr-01'  // pode ter mais de um pois são permitidas atualizações
+,'org_urn'=>'br;sp:cooperativa;plastcooper'
+,'livro-matricula'=>[
+  'estatuto'=>'compilado', // usando Coopcent para demo
+  //'ata-fundacao'=>'2016-05-02'  // usando Coopcent para demo
+]
+];
 
+$urn_path = urn2path($livroContents['org_urn']);
+$f_path = "$baseUrnPath/$urn_path";
 ?>
-</style>
 
+<head>
+ <meta charset="UTF-8">
+ <title>NATRICULA COOP</title>
+ <!-- style ou [link crossorigin="anonymous" href="etc" media="$X" rel="stylesheet"] -->
+ <style rel="stylesheet">
+    <?php
+    if ($cssMode=='all' || $cssMode=='screen')
+      // paged com http://www.princexml.com/samples/webarch/forprint.css
+      // ver PDF e HTML em http://www.princexml.com/samples/#webarch
+      print "\n@media screen and (min-width: 480px) {\n"
+        . file_get_contents("$prjPath/src/assets/livroMatricula-v02-screen1.css")
+        . "\n}"
+      ;
+    else  // MEDIA PRINT (for Prince)
+      print "@media {\n"
+        . file_get_contents("$prjPath/src/assets/livroMatricula-v02-print1.css")
+        . "\n}"
+      ;
+    ?>
+  </style>
 </head>
 
- <body lang="pt">
+<body lang="pt">
+
    <p>waste page</p>
    <p>pdftk original.pdf cat 2-end output semPrimeira.pdf</p>
    <hr>
    <div style="page-break-after: always"></div>
-
 
 <!-- CAPA -->
 <?php
@@ -105,7 +103,7 @@ $input = __DIR__.'/../data/raw/livroMatricula-dados.json';
  <?php
  // use "composer update" in the same folder of json.
   $input = json_decode(file_get_contents($input),true);
-  $template = $m->loadTemplate('livroMatricula-artigo-v02');
+  $template = $m->loadTemplate('livroMatricula-ficha-v01.mustache');
 
   foreach (array_values($input) as $r) {
     echo $template->render($r);

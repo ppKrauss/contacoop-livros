@@ -2,7 +2,9 @@
 notas_tmp.txt
 notas_tmp.sql
 
+
 # dados em sigilo local, nao precisam ir para o git
 data/raw/
 src/assets/_local/
+docs/
 
