@@ -25,7 +25,17 @@ A pasta [`data`](data) contém todos os dados em arquivos e subpastas, algumas d
 
 ### Dados em CSV
 
-https://en.wikipedia.org/wiki/Electronic_data_interchange
+* `livroMatricula-campos.csv` define os nomes de cada campo válido nos templates dos livros de matrícula.
+* `spec02-filenames.csv` define os nomes de pasta e path's válidos na pasta local de documentos (indiretamente define a URN dos documentos). 
+
+* EDI:
+
+  * arquivos com sintaxe `edi-{fornecedor}-modelo{ano}{versao}.{ext}`  com `ext` JSON ou CSV. Contém o nome de campo padronizado e a posição linha-colina de cada dado de uma planilha de [EDI](https://en.wikipedia.org/wiki/Electronic_data_interchange). Estabelece o "modelo de troca de dados" nas planilhas enviadas pelo fornecedor (autoridade responsável pelo dado). Exemplo: `edi-senoConsseno-modelo2016Av1.csv`.
+
+  * `edi-{fornecedor}-layout{ano}{versao}.csv` dump de um registro sem dados para apoiar contratos de fornecimento baseados no `edi-{fornecedor}-modelo{ano}{versao}.csv` de mesmo `{ano}{versao}`. Exemplo: `edi-senoConsseno-layout2016Av1.csv`. 
+
+  * Datasets de apoio ao edi: edi/[municipios-IBGE.csv](data/municipios-IBGE.csv) e edi/[stdCods-grauInstrucao.csv](data/stdCods-grauInstrucao.csv)... datasets usados como "dicionário" (tipicamente tabelas de-para com código-termo) para um ou mais tipos de dados fixados por EDI dos fornecedores. Os dicionários requerem atualização contínua.
+
 
 ### Pasta local data/raw
 Organização da pasta local (não-mantida pelo git), `data/raw`: 
@@ -38,3 +48,8 @@ Organização da pasta local (não-mantida pelo git), `data/raw`:
 ## Etc
 
 Este projeto encontra-se em construção, alguns elementos já se encontram [melhor definidos na Wiki](https://github.com/ppKrauss/contacoop-livros/wiki).
+
+### Protocolo de atualização 
+Similar ao [padrão CrossMark](http://www.crossref.org/crossmark/) de artigos científicos, porém aplicado a documentos legislativos, contratos e estatutos.
+
+![](src/assets/logoAtualizacoes2c-70px.png)
