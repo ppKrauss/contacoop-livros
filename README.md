@@ -53,7 +53,7 @@ Este projeto encontra-se em construção, alguns elementos já se encontram [mel
 
 A versão online da ficha de matrícula do cooperado possui um ID transparente compacto (código base36 no formato `{jurisdicao}{autoridade-cooperativa}{matricula}`), empregado em URLs curtas e representado na forma de QR-Code. Na ficha online são apresentados dados atualizados, e um link (aba) para o histórico de alterações. Por se tratar de uma interface padronizada de consulta e atualização, ela é também referida através do seu ícone.
 
-![](src/assets/logoAtualizacoes2c-70px.png) Similar ao [padrão CrossMark](http://www.crossref.org/crossmark/) de artigos científicos, porém aplicado a documentos legislativos, contratos e estatutos.
+![](src/assets/logoAtualizacoes2c-70px.png) Similar ao [padrão CrossMark](http://www.crossref.org/crossmark/) de artigos científicos, porém aplicado a documentos oficiais da coopertativa.
 
 No protocolo dois modos de consulta (HTTP GET) são previstos:
 
