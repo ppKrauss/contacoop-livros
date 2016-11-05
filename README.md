@@ -49,7 +49,17 @@ Organização da pasta local (não-mantida pelo git), `data/raw`:
 
 Este projeto encontra-se em construção, alguns elementos já se encontram [melhor definidos na Wiki](https://github.com/ppKrauss/contacoop-livros/wiki).
 
-### Protocolo de atualização 
-Similar ao [padrão CrossMark](http://www.crossref.org/crossmark/) de artigos científicos, porém aplicado a documentos legislativos, contratos e estatutos.
+### Protocolo de atualização e ficha online
 
-![](src/assets/logoAtualizacoes2c-70px.png)
+A versão online da ficha de matrícula do cooperado possui um ID transparente compacto (código base36 no formato `{jurisdicao}{autoridade-cooperativa}{matricula}`), empregado em URLs curtas e representado na forma de QR-Code. Na ficha online são apresentados dados atualizados, e um link (aba) para o histórico de alterações. Por se tratar de uma interface padronizada de consulta e atualização, ela é também referida através do seu ícone.
+
+![](src/assets/logoAtualizacoes2c-70px.png) Similar ao [padrão CrossMark](http://www.crossref.org/crossmark/) de artigos científicos, porém aplicado a documentos legislativos, contratos e estatutos.
+
+No protocolo dois modos de consulta (HTTP GET) são previstos:
+
+* solicitação de HTML: pode ser feita pelas URLs `http://qr-c.org/{idBase36}`,  `http://qr-c.org/{idBase36}.htm` ou `http://qr-c.org/urn:{urnCanonica}.htm`. As duas primeiras redirecionarão para a terceira, que apresentará uma página com a interface geral. 
+
+  * Alternativamente, para AJAX de *dialog boxes* ([exemplo](https://jqueryui.com/dialog/#modal-message)) oferece apenas fragmentos HTML em `http://qr-c.org/dialog/{idBase36}` (ou `http://qr-c.org/dialog/{idBase36}.htm`).
+
+* solicitação de JSON: pode ser feita pelas URLs `http://qr-c.org/{idBase36}` (agente JSON consultando),  `http://qr-c.org/{idBase36}.json` (qualquer agente) ou `http://qr-c.org/urn:{urnCanonica}` (agente JSON ou indepentente ao usar `.json`). Em todas elas é  obtido o mesmo retorno  JSON contendo os dados em formato padronizado.
+
