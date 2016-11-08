@@ -2,19 +2,13 @@
 <html>
 <?php
 
+require __DIR__.'/lib.php';
+
   // CONFIGS:
   $cssMode='print';
   $prjPath = dirname(__DIR__);
   $baseUrnPath = "$prjPath/data/raw";
   $input = "$prjPath/data/raw/livroMatricula-dados.json";
-
-
-require  "$prjPath/src/vendor/mustache/mustache/src/Mustache/Autoloader.php";
-Mustache_Autoloader::register();
-$m = new Mustache_Engine;
-$m = new Mustache_Engine(array(
-  'loader' => new Mustache_Loader_FilesystemLoader("$prjPath/src/assets"),
-));
 
 $livroContents = [
 'org_nameshort'=>'PLASTCOOPER'
@@ -119,13 +113,3 @@ $f_path = "$baseUrnPath/$urn_path";
 </body>
 
 </html>
-<?php
-/////////////////////////// LIB /////////////////////
-
-
-function urn2path($urn) { // URN LEX to ELI path
-  return str_replace([':',';'],['/','-'],$urn);
-}
-
-
- ?>

@@ -271,6 +271,13 @@ article.ata div.twocol {
 
 /* ESTATUTO */
 
+article.estatuto header {
+  font-family: Helvetica;
+  font-weight: bold;
+  text-align: center;
+  font-size: 11pt;
+}
+
 article.estatuto ol {
   margin:0;
   margin-top: 3pt;
@@ -293,10 +300,12 @@ article.estatuto div.twocol p:not(.sec):not(.subsec):not(.subsec2) {
   margin:0;
   margin-top: 3pt;
   hyphens: auto;
-  prince-hyphenate-after: 4;  /* dft 2*/
-  prince-hyphenate-before: 4;  /* dft 2*/
-  prince-hyphenate-lines: 1;  /* not working! */
+  /*
+  prince-hyphenate-after: 4;
+  prince-hyphenate-before: 4;
+  prince-hyphenate-lines: 1;
   hyphenate-limit-lines: 1;
+  */
 }
 
 article.estatuto p.sec,
@@ -329,7 +338,8 @@ article.estatuto div.twocol p:not(.sec):not(.subsec):not(.subsec2):not(.art)  {
 }
 */
 
-article.estatuto p.sec{
+article.estatuto p.sec {
+  color: cmyk(0, 0, 0, 65);
   font-size:  9.5pt;  /* 11pt;*/
 }
 article.estatuto p.sec span,

@@ -1,0 +1,45 @@
+/**
+ * Layput geral do livro de matrícula, mídia para tela fluída media ou grande.
+ */
+
+/* @media screen */
+
+body {
+    background-color: lightblue;
+}
+
+/* controle básico dos campos */
+.vtexto, .vdata, .vinteger {
+  font-style: italic;
+}
+
+.wd30em { width: 35ex; display: inline-block;}
+.wd15em { width: 15em; display: inline-block;}
+.wd10em { width: 8em; display: inline-block;}
+.wd05em { width: 5em;  display: inline-block;}
+.wd03em { width: 3em;  display: inline-block;}
+.wd30em:empty, .wd15em:empty,
+.wd10em:empty, .wd05em:empty,
+.wd03em:empty { /* lacuna */
+  border-bottom:1pt dashed #222;
+}
+
+section {font-size: 14pt;}
+section p {line-height:150%;}
+
+/* Demais formatações */
+.FotoCooperado {
+  padding: 2px;
+  margin:  0;
+}
+.FotoCooperado img {
+  width:   340px;
+}
+
+section.dados {
+  width:58em;
+  /*text-align:justify; word-spacing:1em; */
+}
+section.dados h1, section.dados h2 {
+  color:#466;
+}

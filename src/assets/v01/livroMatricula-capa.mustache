@@ -1,0 +1,36 @@
+<article id="capa" class="capa"><!-- capa-->
+
+  <section id="capa">
+  <h1>{{org_namefull}} - <b>{{org_nameshort}}</b></h1>
+  <h2><span>CNPJ</span><span>{{org_cnpj}}</span></h2>
+  {{#org_iscr}}<h2><span>INSCRIÇÃO ESTADUAL</span><span>{{org_iscr}}</span></h2>{{/org_iscr}}
+  {{#org_nire}}<h2><span>NIRE</span><span>{{org_nire}}</span></h2>{{/org_nire}}
+
+  <p class="address">
+      {{org_end_rua}} &#160;•&#160; {{org_end_bairroCidade}}
+      &#160;•&#160; CEP: {{org_end_cep}}
+      &#160;•&#160;
+        {{#org_telfax}}Tel/Fax: {{org_telfax}}{{/org_telfax}}
+        {{^org_telfax}}Tel: {{org_tel}}{{/org_telfax}}
+      &#160;•&#160;
+        {{#org_site}} <a href="http://{{org_site}}">{{org_site}}</a>{{/org_site}}
+        {{^org_site}}&#160;•&#160; <a href="mailto:{{org_mail}}">{{org_mail}}</a>{{/org_site}}
+  </p>
+  </section>
+
+  <section id="toc"><!-- table-of-contents -->
+    <hr/>
+    <p>TABLE OF CONTENTS - CONSTRUINDO e reVISANDO</p>
+
+    <div class="l1"><a href="#abertura">Termo de abertura</a></div>
+    <div class="l1"><a href="#ata-fundacao">Ata de fundação</a></div>
+    <div class="l1"><a href="#estatuto">Estatuto</a></div>
+    <div class="l1"> Matrículas dos cooperados:
+      <div class="l2"><a href="#matricula-1">Mat. 1</a></div>
+      <div class="l2"><a href="#matricula-2">Mat. 2</a></div>
+    </div>
+    <div class="l1"><a href="#fechamento">Termo de encerramento</a></div>
+
+
+  </section>
+</article>

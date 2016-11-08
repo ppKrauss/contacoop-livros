@@ -1,0 +1,212 @@
+/**
+ * Layput de um estatuto, mídia para impressão e PDF.
+ * NOTA: cmyk 75% claro é 190, 75% escuro é 65. Valores de 0-255.
+ */
+
+/* @media print na chamada.  */
+
+@page {
+  size:   A4 portrait;
+  font-family: 'Helvetica Neue', Helvetica, Arial;
+  border-bottom: thin solid cmyk(0%, 0%, 0%, 75%);
+  padding-bottom: 3mm;
+
+  @bottom {
+    font-size: 9.5pt;
+    font-family: 'Helvetica Neue', Helvetica, Arial;
+    vertical-align: top;
+    color:cmyk(0%, 0%, 0%, 75%);
+    margin: 1mm;
+  }
+
+  @bottom-right {
+      font-size: 9.5pt;
+      font-family: 'Helvetica Neue', Helvetica, Arial;
+      vertical-align: top;
+      color:cmyk(0%, 0%, 0%, 75%);
+      margin: 1mm;
+    }
+
+  @bottom-left {
+      font-size: 9.5pt;
+      font-family: 'Helvetica Neue', Helvetica, Arial;
+      vertical-align: top;
+      color:cmyk(0%, 0%, 0%, 75%);
+      margin: 1mm;
+    }
+    /* content nbsp = \00a0 */
+}
+
+@page:first {
+  border-top: none;
+  border-bottom: none;
+  @bottom {
+    content: normal;
+  }
+}
+
+@page:left {
+  margin: 1.0cm 1.5cm 1.0cm 1.0cm;
+
+  @bottom-left {
+    content: counter(page);
+    text-align: outside;
+  }
+
+  @bottom-center {
+    content: "Estatuto Coopcent";
+    font-size: 8pt;
+  }
+  @bottom-right {
+    content: "produzido por seno&coseno contábil";
+    font-size: 8pt;
+  }
+
+}
+
+
+@page:right {
+  margin: 1.0cm 1.0cm 1.0cm 1.5cm;
+  @bottom-right {
+    content: counter(page);
+    text-align: outside;
+  }
+  @bottom-center {
+    content: "Estatuto";
+    font-size: 8pt;
+  }
+  @bottom-left {
+    content: "produzido por seno&coseno contábil"; /*seno&coseno – soluções contábeis*/
+    font-size: 8pt;
+  }
+}
+
+/* #  #  #  #  #  #  #  #  # #  # */
+
+body {
+  counter-reset: page 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial; /* sem uso */
+}
+
+/*  Util: nos termos de abertura e finalização, atas, etc.  */
+span.npages {
+  content: counter(pages);
+}
+
+
+article p.final {
+  padding-top: 1.4cm !important;
+  text-align: right;
+}
+
+._justStop { text-align:left; }
+._brForceBefore { page-break-before: always; }
+
+/* main page-breaks */
+
+article { page-break-after: always; }
+
+p.sec, p.subsec, p.subsec2 {
+  page-break-after: avoid;
+  page-break-inside: avoid;
+}
+p.art, p.par, p._brAvoid {page-break-inside: avoid;}
+
+
+/* TWO-COLUMN CONTENTS */
+
+article.estatuto div.twocol,
+article.ata div.twocol {
+  columns:2;
+  column-gap: 1.8em;
+  font-family: Garamond;
+  font-size: 9.5pt;  /* ou 10pt para 9*/
+  text-align: justify;
+}
+
+/* #  #  #  #  #  #  #  #  # #  # */
+/* ESTATUTO */
+
+/* Elementos do cabeçalho  */
+article.estatuto header {
+  font-family: 'Helvetica Neue', Helvetica, Arial;
+  text-align: center;
+  padding-bottom: 1.2em;
+}
+/* titulo do documento */
+article.estatuto header p:first-child {
+  font-weight: bold;
+  font-size: 11pt;
+}
+
+article.estatuto p.sec,
+article.estatuto p.subsec {
+  text-align: left;
+}
+
+/* ênfase por tonalidade */
+article.estatuto p.sec,
+article.estatuto p.art span:first-child,
+article.estatuto p.par span:first-child {
+  color: cmyk(0%, 0%, 0%, 75%);
+}
+
+/* ênfase por versallete */
+article.estatuto p.sec span,
+article.estatuto p.subsec span,
+article.estatuto p.subsec2 {
+  font-variant: small-caps;
+}
+
+/* # # */
+/* demais elementos do corpo do texto */
+
+article.estatuto div.twocol p:not(.sec):not(.subsec):not(.subsec2) {
+  margin:0;
+  margin-top: 3pt;
+  hyphens: auto;
+  /*
+  prince-hyphenate-after: 4;
+  prince-hyphenate-before: 4;
+  prince-hyphenate-lines: 1;
+  hyphenate-limit-lines: 1;
+  */
+}
+
+article.estatuto p.art span:first-child,
+article.estatuto p.par span:first-child {
+  font-weight: bold;
+}
+
+article.estatuto div.twocol p:not(.sec):not(.subsec):not(.subsec2):not(.art):not(.par)  {
+  margin: 3pt 3pt 3pt 3pt;
+  font-size: 9.5pt;  /* ou 9*/
+  padding: 0;
+  margin-left: 1.0em;
+  text-indent: -1.0em;
+}
+
+/*article.estatuto div.twocol p:not(.sec):not(.subsec):not(.subsec2):not(.art):not(.par)  {
+  margin-left: 1em;
+  text-indent: -0.5em;
+}
+*/
+
+
+article.estatuto ol {
+  margin:0;
+  margin-top: 3pt;
+  margin-left: 2.3em; /* 1.5cm ou 1cm a referência é a pagina?? */
+
+  /*  margin-before: 1em;
+  margin-after: 1em;
+  margin-start: 0;
+  margin-end: 0;
+  padding-start: 80pt;
+  */
+}
+article.estatuto li {
+  padding: 0;
+  margin: 0; /*     margin: 5pt -10pt; */
+  margin-top: 3pt;
+}

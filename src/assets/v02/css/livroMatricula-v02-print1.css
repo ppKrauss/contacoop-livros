@@ -1,0 +1,386 @@
+/**
+ * Layput geral do livro de matrícula, mídia para impressão e PDF.
+ * @see elements at https://developer.mozilla.org/en/docs/Web/HTML/Element
+ * NOTA: cmyk 75% claro é 190, 75% escuro é 65. Valores de 0-255.
+ */
+
+/* @media print na chamada.  */
+
+@page {
+  size:   A4 portrait;
+  font-family: Helvetica;
+  border-bottom: thin solid cmyk(0, 0, 0, 65);
+  padding-bottom: 3mm;
+
+  @bottom {
+    font-size: 9.5pt;
+    font-family: Helvetica;
+    vertical-align: top;
+    color:cmyk(0, 0, 0, 65);
+    margin: 1mm;
+  }
+
+  @bottom-right {
+      font-size: 9.5pt;
+      font-family: Helvetica;
+      vertical-align: top;
+      color:cmyk(0, 0, 0, 65);
+      margin: 1mm;
+    }
+
+  @bottom-left {
+      font-size: 9.5pt;
+      font-family: Helvetica;
+      vertical-align: top;
+      color:cmyk(0, 0, 0, 65);
+      margin: 1mm;
+    }
+    /* content nbsp = \00a0 */
+}
+
+@page:first {
+  border-top: none;
+  border-bottom: none;
+  @bottom {
+    content: normal;
+  }
+}
+
+@page:left {
+  margin: 1.0cm 1.5cm 1.0cm 1.0cm;
+
+  @bottom-left {
+    content: counter(page);
+    text-align: outside;
+  }
+
+  @bottom-center {
+    content: "PLASTCOOPER";
+  }
+  @bottom-right {
+    content: "Seno&Coseno";
+  }
+
+}
+
+@page:right {
+  margin: 1.0cm 1.0cm 1.0cm 1.5cm;
+  @bottom-right {
+    content: counter(page);
+    text-align: outside;
+  }
+  @bottom-center {
+    content: "Livro de Matrícula de Cooperado";
+  }
+  @bottom-left {
+    content: "Seno&Coseno";
+  }
+}
+
+/* #  #  #  #  #  #  #  #  # #  # */
+
+/* GENERAL */
+
+body {
+  counter-reset: page 0;
+  font-family: Helvetica; /* sem uso */
+  font-size: 8pt; /* sem uso */
+}
+
+/* COMMOM (mix of users), and general conventions */
+
+.vtexto, .vdata, .vinteger {
+  font-size: 10.5pt;
+  font-family: Garamond;
+}
+.wdFull { width: 100%; display: inline-block;}
+.wd50em { width: 55ex; display: inline-block;}
+.wd30em { width: 35ex; display: inline-block;}
+.wd25em { width: 25ex; display: inline-block;}
+.wd15em { width: 15em; display: inline-block;}
+.wd10em { width: 8em;  display: inline-block;}
+.wd05em { width: 5em;  display: inline-block;}
+.wd03em { width: 3em;  display: inline-block;}
+
+.wdFull:empty,
+.wd30em:empty, .wd15em:empty, .wd25em:empty,
+.wd10em:empty, .wd05em:empty,
+.wd03em:empty { /* lacuna */
+	border-bottom:1pt dashed cmyk(0, 0, 0, 65);
+}
+
+.demissao blockquote:first-child,
+#bloco-4 table  {
+	margin:0 auto;
+	border:4px solid cmyk(0, 0, 0, 65);
+	background-color:#FFF;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+}
+
+table.signs {
+  width:100%;
+  margin: 0;
+  padding: 0;
+  padding-top: 3em;
+}
+table.signs td:first-child,
+table.signs td:last-child {
+  border-top: 1px solid cmyk(0, 0, 0, 65);
+  padding: 0;
+  margin: 0;
+}
+
+/*  CAPA */
+
+article.capa {
+  text-align: center;
+  font-family: Helvetica;
+}
+
+
+/*  TABLE OF CONTENTS */
+#toc a[href]::after { content: leader(".") target-counter(attr(href), page) }
+#toc div.l1 {padding: 0.8em;}
+#toc div.l2 {padding: 0.3em;}
+#toc a:link, #toc a:visited {
+  text-decoration: none;
+  font-size: 12pt;
+}
+/* duas colunas nos mats */
+
+
+/*  FICHA DE MATRICULA */
+
+section {
+	font-size: 9.5pt;
+}
+section p, section td, blockquote {
+  line-height:150%;
+  /* color: red;  */
+}
+
+
+#bloco-4 table,
+table.dependentes {
+    border-collapse: collapse;
+}
+#bloco-4 td,
+table.dependentes td {
+    border: 1px solid cmyk(0, 0, 0, 65);
+    padding: 2pt;
+}
+#bloco-4 thead td {
+  font-weight: bold;
+}
+#bloco-4 thead tr:nth-child(2) td {
+  font-weight: normal;
+}
+
+#bloco-4 thead tr:first-child {
+  color: cmyk(0, 0, 0, 65);
+  font-size: 125%;
+  text-align:center;
+}
+
+#bloco-4 tbody tr {
+  height: 1cm;
+}
+
+.box {
+	padding:12px;
+}
+
+/* Demais formatações */
+.FotoCooperado {
+	padding: 0;
+	margin:  0;
+}
+.FotoCooperado img {
+  border: 1px solid cmyk(0, 0, 0, 65);
+	width:   134px;
+  padding: 0;
+}
+
+section.dados h1, section.dados h2 {
+	color: cmyk(0, 0, 0, 65);
+}
+section.dados h1 { font-size: 190%; }
+
+div.blk {
+  margin-top:1.6em;
+}
+
+div.blk blockquote {
+  margin-top:2pt;
+}
+
+/* ATAS */
+
+article.ata {
+  hyphens: auto;
+  prince-hyphenate-after: 2;  /* dft 2*/
+  prince-hyphenate-before: 2;  /* dft 2*/
+  prince-hyphenate-lines: 2;  /* not working! */
+  hyphenate-limit-lines: 2;
+}
+
+article.ata header {
+  font-family: Helvetica;
+  font-size: 14pt;
+  text-align: center;
+  hyphens: none;
+}
+article.ata header h1 {
+  font-size: 130%;
+}
+
+.campo span:first-child,
+.txtcampo,
+.qrcode {
+  color: cmyk(0, 0, 0, 65);
+}
+.txtcampo span{
+  color:black;
+}
+
+/* main page-breaks */
+
+article { page-break-after: always; }
+
+section#bloco-4 {  page-break-before: always; }
+
+p.sec, p.subsec, p.subsec2 {
+  page-break-after: avoid;
+  page-break-inside: avoid;
+}
+p.art, p.par, p._brAvoid {page-break-inside: avoid;}
+
+
+/* TWO-COLUMN CONTENTS */
+
+article.estatuto div.twocol,
+article.ata div.twocol {
+  columns:2;
+  column-gap: 1.8em;
+  font-family: Garamond;
+  font-size: 9.5pt;  /* ou 10pt para 9*/
+  text-align: justify;
+}
+
+/* ESTATUTO */
+
+article.estatuto header {
+  font-family: Helvetica;
+  font-weight: bold;
+  text-align: center;
+  font-size: 11pt;
+}
+
+article.estatuto ol {
+  margin:0;
+  margin-top: 3pt;
+  margin-left: 2.3em; /* 1.5cm ou 1cm a referência é a pagina?? */
+
+  /*  margin-before: 1em;
+  margin-after: 1em;
+  margin-start: 0;
+  margin-end: 0;
+  padding-start: 80pt;
+  */
+}
+article.estatuto li {
+  padding: 0;
+  margin: 0; /*     margin: 5pt -10pt; */
+  margin-top: 3pt;
+}
+
+article.estatuto div.twocol p:not(.sec):not(.subsec):not(.subsec2) {
+  margin:0;
+  margin-top: 3pt;
+  hyphens: auto;
+  /*
+  prince-hyphenate-after: 4;
+  prince-hyphenate-before: 4;
+  prince-hyphenate-lines: 1;
+  hyphenate-limit-lines: 1;
+  */
+}
+
+article.estatuto p.sec,
+article.estatuto p.subsec {
+  text-align: left;
+}
+
+article.estatuto p.sec,
+article.estatuto p.art span:first-child,
+article.estatuto p.par span:first-child {
+  color: cmyk(0, 0, 0, 65);
+}
+article.estatuto p.art span:first-child,
+article.estatuto p.par span:first-child {
+  font-weight: bold;
+}
+
+article.estatuto div.twocol p:not(.sec):not(.subsec):not(.subsec2):not(.art)  {
+  margin: 3pt 3pt 3pt 3pt;
+  font-family: Garamond;
+  font-size: 9.5pt;  /* ou 9*/
+  padding: 0;
+  margin-left: 1.0em;
+  text-indent: -1.0em;
+}
+
+/*article.estatuto div.twocol p:not(.sec):not(.subsec):not(.subsec2):not(.art):not(.par)  {
+  margin-left: 1em;
+  text-indent: -0.5em;
+}
+*/
+
+article.estatuto p.sec {
+  color: cmyk(0, 0, 0, 65);
+  font-size:  9.5pt;  /* 11pt;*/
+}
+article.estatuto p.sec span,
+article.estatuto p.subsec span {
+  font-variant: small-caps;
+}
+
+article.estatuto p.subsec2 {
+  font-variant: small-caps;
+}
+
+/*  Util: nos termos de abertura e finalização, atas, etc.  */
+
+._justStop { text-align:left; }
+._brForceBefore { page-break-before: always; }
+
+
+span.npages {
+  content: counter(pages);
+}
+
+
+article p.final {
+  padding-top: 1.4cm !important;
+  text-align: right;
+}
+
+
+/*TERMOS DE ABERTURA*/
+
+article.termo header {
+  text-align: center;
+}
+
+article.matricula td b {
+  font-size: 15pt;
+}
+
+/* falta controlar sec e subsec em
+.content > section {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+}
+*/

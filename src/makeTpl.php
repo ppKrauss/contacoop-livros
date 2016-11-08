@@ -6,9 +6,7 @@
  *  php src/makeTpl.php matricula-html
  */
 
-// use "composer update" in the same folder of json.
-require  __DIR__.'/vendor/mustache/mustache/src/Mustache/Autoloader.php';
-Mustache_Autoloader::register();
+ require __DIR__.'/lib.php';
 
 // config. by terminal:
 $cmd = isset($argv[1])? $argv[1]: '';
