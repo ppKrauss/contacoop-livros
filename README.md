@@ -4,7 +4,7 @@ Projeto de editoração padronizada dos Livros Contábeis de Cooperativas.
 
 Contém,
 * pasta [`data`](data): definições de campos em CSV e dados ilustrativos simulando dados reais.
-* pasta [`src`](src): geradores de templates e templates (ver pasta `assets`).
+* pasta [`src`](src): geradores de templates e templates (ver subpastas [`assets/tpl-*`](src/assets)).
 
 ## Arquivos e pastas de dados
 A pasta [`data`](data) contém todos os dados em arquivos e subpastas, algumas delas disponíveis apenas localmente (dados temporários e/ou sigilosos).
@@ -53,7 +53,7 @@ Este projeto encontra-se em construção, alguns elementos já se encontram [mel
 
 A versão online da ficha de matrícula do cooperado possui um ID transparente compacto (código base36 no formato `{jurisdicao}{autoridade-cooperativa}{matricula}`), empregado em URLs curtas e representado na forma de QR-Code. Na ficha online são apresentados dados atualizados, e um link (aba) para o histórico de alterações. Por se tratar de uma interface padronizada de consulta e atualização, ela é também referida através do seu ícone.
 
-![](src/assets/logoAtualizacoes2c-70px.png) Similar ao [padrão CrossMark](http://www.crossref.org/crossmark/) de artigos científicos, porém aplicado a documentos oficiais da coopertativa.
+![](src/assets/img/logoAtualizacoes-70px.png) Similar ao [padrão CrossMark](http://www.crossref.org/crossmark/) de artigos científicos, porém aplicado a documentos oficiais da coopertativa.
 
 No protocolo dois modos de consulta (HTTP GET) são previstos:
 
